@@ -34,20 +34,25 @@ jobs:
         with:
           python-version: '3.12'
       - name: Collect papers and official RSS feeds
+        if: github.event_name != 'push'
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: python scripts/collect.py
       - name: Save updated data to repository
+        if: github.event_name != 'push'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add site/data.json site/seed.js
           if ! git diff --cached --quiet; then
             git commit -m 'chore: refresh weekly research metadata'
-            git push
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
