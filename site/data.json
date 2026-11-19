@@ -1,15 +1,24 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-19T08:21:26+00:00",
-  "last_checked_at": "2026-11-19T08:21:26+00:00",
+  "generated_at": "2026-11-19T09:06:36+00:00",
+  "last_checked_at": "2026-11-19T09:06:36+00:00",
   "timezone": "Asia/Shanghai",
   "sources_note": "自动发现未进行同行评审；期刊与会议分区须人工核实。",
   "fetch_status": [
     {
-      "source": "离线初始化",
+      "source": "OpenAlex",
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "source": "arXiv",
       "ok": true,
-      "collected": 7,
-      "note": "首次版本包含人工精选样例，尚未进行在线自动采集"
+      "collected": 2
+    },
+    {
+      "source": "MIT News RSS",
+      "ok": true,
+      "collected": 0
     }
   ],
   "items": [
