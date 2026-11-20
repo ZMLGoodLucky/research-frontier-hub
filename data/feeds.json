@@ -1,3 +1,80 @@
 [
-  {"name": "MIT News · AI", "url": "https://news.mit.edu/rss/topic/artificial-intelligence2", "enabled": true, "note": "仅收录标题或摘要与交通/交通管理/时空预测直接相关的内容"}
+  {
+    "name": "MIT News · AI",
+    "organization": "MIT News",
+    "url": "https://news.mit.edu/rss/topic/artificial-intelligence2",
+    "enabled": true,
+    "kind": "insight",
+    "venue": "MIT News",
+    "format": "rss",
+    "note": "研究机构资讯，按交通与时空领域关键词过滤"
+  },
+  {
+    "name": "IEEE Spectrum",
+    "organization": "IEEE",
+    "url": "https://spectrum.ieee.org/feeds/feed.rss",
+    "enabled": true,
+    "kind": "insight",
+    "venue": "IEEE Spectrum",
+    "format": "rss",
+    "note": "IEEE官方技术报道，不等同IEEE论文"
+  },
+  {
+    "name": "Communications of the ACM · News",
+    "organization": "ACM",
+    "url": "https://cacm.acm.org/section/news/feed/",
+    "enabled": true,
+    "kind": "insight",
+    "venue": "Communications of the ACM · News",
+    "format": "rss",
+    "note": "ACM官方资讯，需要相关性筛选"
+  },
+  {
+    "name": "Springer Nature · Nature",
+    "organization": "Springer Nature",
+    "url": "https://www.nature.com/nature.rss",
+    "enabled": true,
+    "kind": "paper",
+    "venue": "Nature",
+    "format": "rss",
+    "note": "Nature出版信息RSS，不代表所有Springer Nature期刊"
+  },
+  {
+    "name": "Elsevier · ESWA",
+    "organization": "Elsevier",
+    "url": "https://rss.sciencedirect.com/publication/science/09574174",
+    "enabled": true,
+    "kind": "paper",
+    "venue": "Expert Systems with Applications",
+    "format": "rss",
+    "note": "ScienceDirect期刊RSS，若订阅地址失效则记录错误"
+  },
+  {
+    "name": "Elsevier · EAAI",
+    "organization": "Elsevier",
+    "url": "https://rss.sciencedirect.com/publication/science/09521976",
+    "enabled": true,
+    "kind": "paper",
+    "venue": "Engineering Applications of Artificial Intelligence",
+    "format": "rss",
+    "note": "ScienceDirect期刊RSS，若订阅地址失效则记录错误"
+  },
+  {
+    "name": "TRB 官方研究资讯",
+    "organization": "TRB",
+    "url": "https://www.trb.org/Main/RssFeeds.aspx",
+    "enabled": false,
+    "kind": "insight",
+    "format": "manual",
+    "note": "TRB官方说明通用RSS暂停提供；仅保留人工核验入口，不能冒充自动订阅"
+  },
+  {
+    "name": "TRB Publications Index",
+    "organization": "TRB",
+    "url": "https://pubsindex.trb.org/",
+    "enabled": false,
+    "kind": "paper",
+    "format": "manual",
+    "note": "支持站内自定义RSS订阅，需要用户生成订阅地址后才能自动收录"
+  }
 ]

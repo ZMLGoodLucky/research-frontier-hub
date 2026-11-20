@@ -19,6 +19,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from venue_metadata import annotate, load_registry
+from extra_sources import crossref, semantic_scholar, official_feed, choose_daily
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,8 +36,10 @@ def read_json(file: Path, fallback):
         return fallback
 
 
-def request(url: str, *, timeout: int = 18) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json, application/atom+xml, application/rss+xml, application/xml;q=.9, */*;q=.5"})
+def request(url: str, *, timeout: int = 18, extra_headers: dict | None = None) -> bytes:
+    headers = {"User-Agent": USER_AGENT, "Accept": "application/json, application/atom+xml, application/rss+xml, application/xml;q=.9, */*;q=.5"}
+    headers.update(extra_headers or {})
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         if resp.status != 200:
             raise ValueError(f"HTTP {resp.status}")
@@ -66,7 +70,10 @@ def relevant(title: str, abstract: str = "") -> bool:
     road = bool(re.search(r"traffic flow|road traffic|traffic speed|traffic forecasting|traffic prediction|traffic state|traffic congestion|transportation network|urban mobility", t))
     forecasting = bool(re.search(r"forecast|predict|prediction|prognosis", t))
     if road and forecasting: return True
-    return bool("traffic" in t and forecasting and re.search(r"road|urban|traffic flow|transportation",context))
+    if "traffic" in t and forecasting and re.search(r"road|urban|traffic flow|transportation",context):return True
+    return bool(re.search(r"traffic|road|congestion|highway",t) and
+        re.search(r"incident|accident|shockwave|non.recurrent|disruption",context) and
+        re.search(r"propagat|forecast|predict|duration|recovery|impact|arrival|scope",context))
 
 
 def infer_topic(title: str, abstract: str = "") -> tuple[str, list[str]]:
@@ -85,12 +92,12 @@ def digest_id(source: str, key: str) -> str:
     return source + "-" + hashlib.sha1(key.strip().lower().encode("utf-8")).hexdigest()[:14]
 
 
-def candidate(source: str, title: str, date: str, link: str, abstract: str, venue: str, status: str, *, doi: str = "") -> dict:
+def candidate(source: str, title: str, date: str, link: str, abstract: str, venue: str, status: str, *, doi: str = "", kind: str = "paper", publication_type: str = "unknown") -> dict:
     category, topics = infer_topic(title, abstract)
     abstract = re.sub(r"\s+", " ", abstract or "").strip()
     return {
-        "id": digest_id(source.lower().replace(' ', '-'), doi or link), "type": "insight" if source.startswith("MIT") else "paper",
-        "category": category if not source.startswith("MIT") else "权威资讯", "topics": topics,
+        "id": digest_id(source.lower().replace(' ', '-'), doi or link), "type": kind, "publication_type": publication_type, "discovered_via": [source],
+        "category": category if kind == "paper" else "权威资讯", "topics": topics,
         "title": title.strip(), "title_zh": "", "date": date, "source": source, "venue": venue,
         "status": status, "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级", "verified": False,
         "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
@@ -119,7 +126,9 @@ def openalex(cfg: dict, start: dt.date) -> list[dict]:
             link = safe_url(obj.get("doi")) or safe_url(obj.get("id"))
             if not link: continue
             kind = obj.get("type") or "未知类型"
-            all_items.append(candidate("OpenAlex",title,date,link,abstract,journal,f"数据库记录：{kind} · 尚待核验",doi=doi))
+            source_type=((location.get("source") or {}).get("type") or "").lower()
+            pub_type="conference" if "proceeding" in kind else ("journal" if source_type=="journal" else "unknown")
+            all_items.append(candidate("OpenAlex",title,date,link,abstract,journal,f"数据库记录：{kind} · 尚待核验",doi=doi,publication_type=pub_type))
     return all_items
 
 
@@ -147,24 +156,6 @@ def arxiv(cfg: dict, start: dt.date) -> list[dict]:
     return items
 
 
-def mit_rss(cfg: dict, start: dt.date) -> list[dict]:
-    items=[]
-    for feed in read_json(ROOT/"data/feeds.json",[]):
-        if not feed.get("enabled"):continue
-        root=ET.fromstring(request(feed["url"]))
-        for e in root.findall(".//item"):
-            title=" ".join((e.findtext("title") or "").split())
-            summary=re.sub("<[^>]*>", " ", e.findtext("description") or "")
-            if not re.search(r"traffic|transportation|mobility|congestion|spatiotemporal", (title+" "+summary).lower()):continue
-            date_raw=e.findtext("pubDate") or ""
-            try:published=email.utils.parsedate_to_datetime(date_raw).date().isoformat()
-            except (TypeError,ValueError):continue
-            if not valid_date(published,start):continue
-            link=safe_url(e.findtext("link"))
-            if not link:continue
-            items.append(candidate("MIT News",title,published,link,summary,"MIT News · 官方报道","机构资讯 · 非学术论文"))
-    return items
-
 
 def deduplicate(items: list[dict], limit: int) -> list[dict]:
     seen=set(); result=[]
@@ -175,7 +166,17 @@ def deduplicate(items: list[dict], limit: int) -> list[dict]:
         url=(obj.get("url") or "").split("?")[0].rstrip("/").lower()
         keys={"title:"+title,"url:"+url}
         if doi:keys.add("doi:"+doi)
-        if keys & seen:continue
+        if keys & seen:
+            # Existing record wins, preserving editorial review metadata.
+            # Only origin provenance is aggregated across databases.
+            for prev in result:
+                ptitle=re.sub(r"[^a-z0-9]+","",(prev.get("title") or "").lower())[:110]
+                pdoi=(prev.get("doi") or "").lower()
+                purl=(prev.get("url") or "").split("?")[0].rstrip("/").lower()
+                if ("title:"+ptitle in keys) or ("url:"+purl in keys) or (pdoi and "doi:"+pdoi in keys):
+                    prev["discovered_via"]=list(dict.fromkeys((prev.get("discovered_via") or [prev.get("source")]) + (obj.get("discovered_via") or [obj.get("source")])))
+                    break
+            continue
         seen.update(keys);result.append(obj)
         if len(result)>=limit:break
     return sorted(result, key=lambda a: (a.get("date", ""), int(bool(a.get("editorial")))), reverse=True)
@@ -192,9 +193,25 @@ def main():
     status=[];new=[]
     if not options.offline:
         start=TODAY-dt.timedelta(days=int(cfg.get("days_to_collect",14)))
-        for name, fn in (("OpenAlex",openalex),("arXiv",arxiv),("MIT News RSS",mit_rss)):
+        providers = (
+            ("OpenAlex",lambda:openalex(cfg,start)),
+            ("arXiv",lambda:arxiv(cfg,start)),
+            ("Crossref",lambda:crossref(cfg,start,request,relevant,valid_date,candidate,TODAY)),
+            ("Semantic Scholar",lambda:semantic_scholar(cfg,start,request,relevant,valid_date,candidate,TODAY))
+        )
+        for name, fn in providers:
             try:
-                entries=fn(cfg,start);new.extend(entries)
+                entries=fn();new.extend(entries)
+                status.append({"source":name,"ok":True,"collected":len(entries)})
+                print(f"[OK] {name}: {len(entries)} records",flush=True)
+            except Exception as exc:
+                status.append({"source":name,"ok":False,"error":str(exc)[:160]})
+                print(f"[WARNING] {name}: {exc}",file=sys.stderr,flush=True)
+        for feed in read_json(ROOT/"data/feeds.json",[]):
+            if not feed.get("enabled") or feed.get("format")=="manual":continue
+            name=feed.get("name","官方资讯")
+            try:
+                entries=official_feed(feed,start,request,relevant,valid_date,candidate);new.extend(entries)
                 status.append({"source":name,"ok":True,"collected":len(entries)})
                 print(f"[OK] {name}: {len(entries)} records",flush=True)
             except Exception as exc:
@@ -204,11 +221,26 @@ def main():
         status=[{"source":"离线初始化","ok":True,"collected":len(curated),"note":"首次版本包含人工精选样例，尚未进行在线自动采集"}]
     historic=[a for a in historic if a.get("date") and a.get("url")]
     combined=deduplicate(curated+new+historic,limit=max(90,int(cfg.get("max_auto_items",70))+len(curated)))
+    registry=load_registry()
+    combined=[annotate(x,registry) for x in combined]
+    history_path=ROOT/"site/digest_history.json"
+    history=read_json(history_path,{})
+    if not isinstance(history,dict):history={}
+    key=TODAY.isoformat()
+    picks=history.get(key)
+    if not isinstance(picks,list):
+        picks=choose_daily(combined,TODAY,history,limit=5)
+    picks=[x for x in picks if any(a["id"]==x for a in combined)]
+    history[key]=picks
+    history={d:v for d,v in history.items() if isinstance(v,list) and re.fullmatch(r"\d{4}-\d{2}-\d{2}",d) and 0 <= (TODAY-dt.date.fromisoformat(d)).days <= 30}
+    history_path.write_text(json.dumps(history,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     successful=any(s["ok"] for s in status)
     now=dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
     out={"schema_version":"1.0","generated_at": now if successful else existing.get("generated_at",now),
          "last_checked_at":now,"timezone":"Asia/Shanghai","sources_note":"自动发现未进行同行评审；期刊与会议分区须人工核实。",
-         "fetch_status":status,"items":combined}
+         "fetch_status":status,"items":combined,
+         "daily_digest":{"date":TODAY.isoformat(),"ids":picks,"target":"每天优选3–5篇；不足则不凑数","mode":"算法初筛，未完成全文人工核验"},
+         "venue_registry_edition":{"ccf":registry["edition"]["ccf"],"cas":"2025历史版（2026年停止更新）"}}
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     # File:// fallback preview. Deliberately includes same vetted metadata as JSON.

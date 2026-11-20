@@ -1,0 +1,38 @@
+[
+  {
+    "name": "IEEE Xplore",
+    "url": "https://ieeexplore.ieee.org/",
+    "integration": "经Crossref/OpenAlex/Semantic Scholar索引发现论文；IEEE Spectrum RSS用于机构技术资讯",
+    "automatic": true
+  },
+  {
+    "name": "Elsevier ScienceDirect",
+    "url": "https://www.sciencedirect.com/",
+    "integration": "经学术元数据检索+ESWA/EAAI刊物RSS；不是全文采集",
+    "automatic": true
+  },
+  {
+    "name": "Springer Nature",
+    "url": "https://link.springer.com/",
+    "integration": "跨数据库检索+Nature出版RSS",
+    "automatic": true
+  },
+  {
+    "name": "ACM Digital Library",
+    "url": "https://dl.acm.org/",
+    "integration": "跨数据库检索+Communications of the ACM官方资讯RSS",
+    "automatic": true
+  },
+  {
+    "name": "Transportation Research Board (TRB)",
+    "url": "https://www.trb.org/",
+    "integration": "官网RSS暂不可用，保留权威入口与待人工审核来源，不保证自动收录",
+    "automatic": false
+  },
+  {
+    "name": "MIT News",
+    "url": "https://news.mit.edu/",
+    "integration": "官方人工智能主题RSS，筛选交通相关研究资讯",
+    "automatic": true
+  }
+]

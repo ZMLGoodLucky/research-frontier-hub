@@ -51,7 +51,20 @@
       "doi": "10.1016/j.engappai.2026.116321",
       "code": "",
       "featured": true,
-      "editorial": true
+      "editorial": true,
+      "publication_type": "journal",
+      "venue_abbr": "EAAI",
+      "venue_full": "Engineering Applications of Artificial Intelligence",
+      "ccf_grade": "C",
+      "ccf_listed": true,
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/zgjsjxhtjgjxskw/cl/2017-04-25/592015.shtml",
+      "cas_zone": "2025版待核验",
+      "cas_edition": "2025历史版",
+      "cas_source": "https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html",
+      "ccf_edition": "2026-03-31 第七版",
+      "discovered_via": [
+        "Elsevier · Engineering Applications of Artificial Intelligence"
+      ]
     },
     {
       "id": "eswa-2026-cm-mscgcn",
@@ -82,7 +95,20 @@
       "doi": "10.1016/j.eswa.2026.135039",
       "code": "",
       "featured": true,
-      "editorial": true
+      "editorial": true,
+      "publication_type": "journal",
+      "venue_abbr": "ESWA",
+      "venue_full": "Expert Systems with Applications",
+      "ccf_grade": "C",
+      "ccf_listed": true,
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/",
+      "cas_zone": "2025版待核验",
+      "cas_edition": "2025历史版",
+      "cas_source": "https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html",
+      "ccf_edition": "2026-03-31 第七版",
+      "discovered_via": [
+        "Elsevier · Expert Systems with Applications"
+      ]
     },
     {
       "id": "srep-2026-dsgn-tmt",
@@ -113,7 +139,20 @@
       "doi": "10.1038/s41598-026-80267-w",
       "code": "",
       "featured": true,
-      "editorial": true
+      "editorial": true,
+      "publication_type": "journal",
+      "venue_abbr": "Sci Rep",
+      "venue_full": "Scientific Reports",
+      "ccf_grade": "待核验",
+      "ccf_listed": null,
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
+      "cas_zone": "2025版待核验",
+      "cas_edition": "2025历史版",
+      "cas_source": "https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html",
+      "ccf_edition": "2026-03-31 第七版",
+      "discovered_via": [
+        "Springer Nature · Scientific Reports"
+      ]
     },
     {
       "id": "arxiv-2611-12635",
@@ -144,7 +183,20 @@
       "doi": "",
       "code": "",
       "featured": false,
-      "editorial": true
+      "editorial": true,
+      "publication_type": "preprint",
+      "venue_abbr": "arXiv",
+      "venue_full": "arXiv 预印本平台",
+      "ccf_grade": "不适用",
+      "ccf_listed": null,
+      "ccf_source": "",
+      "cas_zone": "不适用",
+      "cas_edition": null,
+      "cas_source": "",
+      "ccf_edition": null,
+      "discovered_via": [
+        "arXiv:2611.12635"
+      ]
     },
     {
       "id": "arxiv-2611-09015",
@@ -175,7 +227,20 @@
       "doi": "",
       "code": "",
       "featured": false,
-      "editorial": true
+      "editorial": true,
+      "publication_type": "preprint",
+      "venue_abbr": "arXiv",
+      "venue_full": "arXiv 预印本平台",
+      "ccf_grade": "不适用",
+      "ccf_listed": null,
+      "ccf_source": "",
+      "cas_zone": "不适用",
+      "cas_edition": null,
+      "cas_source": "",
+      "ccf_edition": null,
+      "discovered_via": [
+        "arXiv:2611.09015"
+      ]
     },
     {
       "id": "arxiv-2610-37598",
@@ -206,7 +271,20 @@
       "doi": "",
       "code": "",
       "featured": false,
-      "editorial": true
+      "editorial": true,
+      "publication_type": "preprint",
+      "venue_abbr": "arXiv",
+      "venue_full": "arXiv 预印本平台",
+      "ccf_grade": "不适用",
+      "ccf_listed": null,
+      "ccf_source": "",
+      "cas_zone": "不适用",
+      "cas_edition": null,
+      "cas_source": "",
+      "ccf_edition": null,
+      "discovered_via": [
+        "arXiv:2610.37598"
+      ]
     },
     {
       "id": "mit-2026-cathy-wu",
@@ -236,7 +314,36 @@
       "doi": "",
       "code": "",
       "featured": false,
-      "editorial": true
+      "editorial": true,
+      "publication_type": "news",
+      "venue_abbr": "机构资讯",
+      "venue_full": "MIT News（研究机构报道）",
+      "ccf_grade": "不适用",
+      "ccf_listed": null,
+      "ccf_source": "",
+      "cas_zone": "不适用",
+      "cas_edition": null,
+      "cas_source": "",
+      "ccf_edition": null,
+      "discovered_via": [
+        "MIT News"
+      ]
     }
-  ]
+  ],
+  "daily_digest": {
+    "date": "2026-11-20",
+    "ids": [
+      "eai-2026-dynamic-dependency",
+      "eswa-2026-cm-mscgcn",
+      "srep-2026-dsgn-tmt",
+      "arxiv-2611-12635",
+      "arxiv-2611-09015"
+    ],
+    "target": "每天优选3–5篇；不足不凑数",
+    "mode": "初始存量精选，非当天新发表；每日采集运行后将自动刷新"
+  },
+  "venue_registry_edition": {
+    "ccf": "2026-03-31 第七版",
+    "cas": "2025历史版（2026年停止更新）"
+  }
 }

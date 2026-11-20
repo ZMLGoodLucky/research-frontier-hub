@@ -1,0 +1,81 @@
+{
+  "edition": {
+    "ccf": "2026-03-31 第七版",
+    "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
+    "cas": "2025（历史版）",
+    "cas_notice": "https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html",
+    "note": "中国科学院文献情报中心自2026年起不再更新/发布期刊分区表；期刊分区须授权核对2025年历史数据，不以JCR或第三方替代。"
+  },
+  "venues": [
+    {
+      "name": "Expert Systems with Applications",
+      "abbr": "ESWA",
+      "kind": "journal",
+      "aliases": [
+        "expert systems with applications"
+      ],
+      "ccf": "C",
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/",
+      "ccf_category": "人工智能",
+      "cas_zone": null,
+      "cas_year": 2025
+    },
+    {
+      "name": "Engineering Applications of Artificial Intelligence",
+      "abbr": "EAAI",
+      "kind": "journal",
+      "aliases": [
+        "engineering applications of artificial intelligence"
+      ],
+      "ccf": "C",
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/zgjsjxhtjgjxskw/cl/2017-04-25/592015.shtml",
+      "ccf_category": "人工智能",
+      "cas_zone": null,
+      "cas_year": 2025
+    },
+    {
+      "name": "Scientific Reports",
+      "abbr": "Sci Rep",
+      "kind": "journal",
+      "aliases": [
+        "scientific reports"
+      ],
+      "ccf": null,
+      "cas_zone": null,
+      "cas_year": 2025
+    },
+    {
+      "name": "Conference on Neural Information Processing Systems",
+      "abbr": "NeurIPS",
+      "kind": "conference",
+      "aliases": [
+        "neurips",
+        "nips",
+        "advances in neural information processing systems",
+        "conference on neural information processing systems"
+      ],
+      "ccf": "A",
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/zgjsjxhtjgjxshy/al/2017-04-25/592028.shtml",
+      "ccf_category": "人工智能"
+    },
+    {
+      "name": "arXiv",
+      "abbr": "arXiv",
+      "kind": "preprint",
+      "aliases": [
+        "arxiv",
+        "arxiv preprint",
+        "arxiv 预印本"
+      ]
+    },
+    {
+      "name": "MIT News",
+      "abbr": "MIT News",
+      "kind": "news",
+      "aliases": [
+        "mit news",
+        "mit news（研究机构报道）"
+      ]
+    }
+  ]
+}

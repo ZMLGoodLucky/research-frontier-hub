@@ -30,10 +30,10 @@ git push origin main
 
 GitHub Actions 计划 **每天北京时间 09:00（UTC 01:00）**运行；GitHub 定时任务可能延迟。无新成果时不会杜撰新条目，仍会保存采集状态。它将：
 
-1. 使用 OpenAlex 检索发表日期位于最近14天的道路交通预测相关论文（14 天是漏检回补窗口，并不代表每天都会新增论文）；
+1. 使用 OpenAlex、Crossref、Semantic Scholar 交叉检索最近14天的道路交通预测、交通事件、事故传播等相关论文（14 天是漏检回补窗口，并不代表每天都会新增论文）；
 2. 使用 arXiv API 发现新增预印本；
-3. 使用 MIT News RSS 发现与交通或时空建模有关的机构资讯（无匹配时为零）；
-4. 去重并保存 `site/data.json` 和 `site/seed.js`，随后重新部署站点。
+3. 使用 MIT News、IEEE Spectrum、ACM、Springer Nature（Nature）、Elsevier（ESWA/EAAI）等官方RSS发现相关论文与机构资讯；TRB官方已暂停通用RSS，保留其官方网站与人工收录入口（无匹配时为零）；
+4. 以DOI/标题/URL跨库去重，记录来源，生成当天最多5篇不重复候选（不足3篇时不凑数），保存 `site/data.json`、`site/seed.js` 和 `site/digest_history.json`，然后部署。
 
 如数据源异常，工作流保留旧记录并在 `fetch_status` 里记录错误。OpenAlex 当前支持无密钥的低频检索；注册免费 API Key 可提高配额：仓库 **Settings → Secrets and variables → Actions → New repository secret**，名称 `OPENALEX_API_KEY`。不强制配置。
 
@@ -80,3 +80,15 @@ python -m unittest discover -s tests -v
 ## 5. 许可与引用
 
 本项目仅记录公开元数据、少量编辑性中文概括及原文链接。请以各出版社、会议和数据平台的原始记录为准。采集源及发布日期会明确列出，不进行文章全文转载。
+
+## 6. V1.2 刊会评级与多源检索
+
+- 数据层接入 OpenAlex、arXiv、Crossref、Semantic Scholar（部分接口需要配置密钥/可能被限流）；官方资讯来自已配置RSS，失败会单独记入 fetch_status。
+- `data/venue_registry.json` 维护简称、全称、出版类型与**CCF 2026 第七版**评级；仅已核对的期刊/会议显示 A/B/C，未知值显示“待核验”。
+- **中国科学院文献情报中心 2026 年起停止更新并发布分区表**，网站只预留**2025 历史版**可核验分区，未知不伪造；中科院分区与 JCR Q1–Q4 不能互换。
+- arXiv 独立显示“预印本”，绝不因为作者声称获会议接收而自动套用会议的 CCF 等级。
+- `data/source_directory.json` 是出版社/机构权威入口目录；TRB因官方RSS已停止，标注为人工收录，不保证自动入库。
+- `scripts/extra_sources.py` 是 Crossref、Semantic Scholar 和 RSS 适配器；`scripts/venue_metadata.py` 做已核验刊会映射。
+- 每日速览为**自动算法初筛候选**而非AI阅读全文评审结论；过去14日已展示的记录会优先排除。当日不足3篇时保持真实数量。
+- 如果用户希望配置 API key，使用 GitHub 仓库的 Actions Secrets：`OPENALEX_API_KEY`、`S2_API_KEY`、`CROSSREF_MAILTO`。任何密钥都不得放入公开仓库。
+- 官方参考：CCF 2026 https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml ；中国科学院文献情报中心停更声明 https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html ；TRB RSS停用 https://www.trb.org/Main/RssFeeds.aspx

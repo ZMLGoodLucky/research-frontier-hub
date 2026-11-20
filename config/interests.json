@@ -1,7 +1,41 @@
 {
-  "research_directions": ["多视角时空建模", "自监督学习", "动态图神经网络", "事件引导交通预测", "时延传播与影响范围", "鲁棒性与跨域泛化", "天气与外部因素融合"],
-  "openalex_queries": ["traffic flow forecasting graph", "traffic prediction spatiotemporal graph", "incident aware traffic forecasting", "self supervised traffic forecasting"],
-  "arxiv_queries": ["all:\"traffic forecasting\"", "all:\"traffic flow prediction\""],
+  "research_directions": [
+    "多视角时空建模",
+    "自监督学习",
+    "动态图神经网络",
+    "事件引导交通预测",
+    "事故传播时滞与冲击到达时间",
+    "事故持续时间与恢复预测",
+    "交通事件影响范围及边界",
+    "恶劣天气与多模态",
+    "鲁棒性与跨域泛化"
+  ],
+  "openalex_queries": [
+    "traffic flow forecasting graph neural network",
+    "incident aware traffic prediction",
+    "traffic incident impact prediction",
+    "traffic congestion propagation prediction",
+    "self supervised traffic forecasting",
+    "dynamic graph traffic forecasting"
+  ],
+  "arxiv_queries": [
+    "all:\"traffic forecasting\"",
+    "all:\"traffic flow prediction\"",
+    "all:\"incident-aware traffic\"",
+    "all:\"traffic congestion propagation\""
+  ],
+  "crossref_queries": [
+    "traffic flow forecasting graph neural network",
+    "traffic incident impact propagation",
+    "urban traffic forecasting self supervised"
+  ],
+  "semantic_scholar_queries": [
+    "traffic flow forecasting graph neural network",
+    "incident-aware traffic forecasting"
+  ],
   "days_to_collect": 14,
-  "max_auto_items": 70
+  "max_auto_items": 110,
+  "daily_target_min": 3,
+  "daily_target_max": 5,
+  "sources_note": "多源自动发现与标题过滤，人工创新性与CCF/CAS年份核验分开"
 }

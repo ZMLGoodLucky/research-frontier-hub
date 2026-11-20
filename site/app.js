@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
-  const state = { items: [], view: 'all', topic: '全部方向', days: '30', sort: 'newest', search: '', saved: new Set(), meta: {} };
+  const state = { items: [], view: 'all', topic: '全部方向', days: '30', sort: 'newest', publication: 'all', ccf: 'all', search: '', saved: new Set(), meta: {} };
   try { state.saved = new Set(JSON.parse(localStorage.getItem('frontierlab:saved') || '[]')); } catch (_) { state.saved = new Set(); }
   const escape = (x) => String(x ?? '').replace(/[&<>"']/g, (ch) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
   const url = (x) => { try { const v = new URL(x); return /^https?:$/.test(v.protocol) ? v.href : ''; } catch (_) { return ''; } };
@@ -25,10 +25,12 @@
       if (state.view === 'paper' && a.type !== 'paper') return false;
       if (state.view === 'insight' && a.type !== 'insight') return false;
       if (state.view === 'saved' && !state.saved.has(a.id)) return false;
+      if (state.publication !== 'all' && (a.publication_type || 'unknown') !== state.publication) return false;
+      if (state.ccf !== 'all' && (a.ccf_grade || '待核验') !== state.ccf) return false;
       if (state.view !== 'saved' && state.days !== 'all' && !(age(a.date) >= 0 && age(a.date) <= Number(state.days))) return false;
       if (!matchesTopic(a)) return false;
       if (state.search) {
-        const t = [a.title, a.title_zh, a.source, a.venue, a.category, ...(a.topics || []), a.problem, a.method, a.relevance].join(' ').toLowerCase();
+        const t = [a.title, a.title_zh, a.source, a.venue, a.venue_abbr, a.venue_full, a.ccf_grade, a.cas_zone, a.category, ...(a.topics || []), a.problem, a.method, a.relevance].join(' ').toLowerCase();
         if (!t.includes(state.search.toLowerCase())) return false;
       }
       return true;
@@ -37,12 +39,40 @@
     return list;
   }
   function rankLabel(a) { return a.level || '评级待核实'; }
+  const publicationName = kind => ({journal:'期刊',conference:'会议',preprint:'预印本',news:'机构资讯',unknown:'类型待核验'})[kind] || '类型待核验';
+  function publicationLine(a) {
+    const kind=a.publication_type || 'unknown';
+    const full=a.venue_full || a.venue || a.source || '刊会待核验';
+    const short=a.venue_abbr || (kind==='preprint' ? 'arXiv' : '简称待核验');
+    const ccf=a.ccf_grade || '待核验';
+    const cas=a.cas_zone || (kind==='journal' ? '2025版待核验' : '不适用');
+    return `<div class="publication-line">
+      <span class="publication-kind">${publicationName(kind)}</span>
+      <span class="publication-short">${escape(short)}</span>
+      <span class="publication-full" title="${escape(full)}">${escape(full)}</span>
+      <span class="publication-ranks"><span class="rank-pill">CCF ${escape(ccf)}</span><span class="rank-pill">中科院 ${escape(cas)}</span></span>
+    </div>`;
+  }
+  function renderDaily() {
+    const digest=state.meta?.daily_digest;
+    const list=Array.isArray(digest?.ids) ? digest.ids.map(id=>state.items.find(x=>x.id===id)).filter(Boolean) : [];
+    $('dailyDate').textContent=digest?.date ? digest.date.replaceAll('-','.') : '尚未生成';
+    $('dailyDescription').textContent=list.length
+      ? `本期自动优选 ${list.length} 篇（目标3–5篇）。仅基于元数据与关键词排序，未核验全文的候选不等于人工推荐。`
+      : '暂无新的、符合条件且未在近14天重复推荐的论文。无新成果时不凑数。';
+    $('dailyList').innerHTML=list.length ? list.map((a,i)=>`<article class="daily-pick">
+      <div class="daily-pick-top"><span>NO. ${String(i+1).padStart(2,'0')}</span><span>${escape(a.publication_type==='journal' ? '期刊论文' : a.publication_type==='conference' ? '会议论文' : '预印本/待核验')}</span></div>
+      <h3>${escape(a.title_zh || a.title)}</h3>
+      <p>${escape(a.venue_abbr || a.venue || a.source)} · CCF ${escape(a.ccf_grade || '待核验')} · 中科院 ${escape(a.cas_zone || '待核验')}</p>
+      <a href="${escape(url(a.url) || '#')}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>
+      </article>`).join('') : '<div class="daily-empty">目前没有符合新论文条件的记录，查看下方「论文雷达」可浏览历史成果。</div>';
+  }
   function card(a) {
     const published = age(a.date);
     const fresh = published >= 0 && published <= 7;
     const isSaved = state.saved.has(a.id);
     return `<article class="paper-card"><div class="paper-header"><div class="tags"><span class="tag ${a.type === 'insight' ? 'tag-orange' : ''}">${typeName(a)}</span><span class="tag tag-secondary">${escape(a.category || '时空预测')}</span>${isCurated(a) ? '<span class="tag tag-gray">人工精选</span>' : '<span class="tag tag-gray">自动发现 · 待核验</span>'}${fresh ? '<span class="tag">近7天</span>' : ''}</div><time class="paper-date" datetime="${escape(a.date)}">${pretty(a.date)}</time></div>
-      <h3 class="paper-title">${escape(a.title_zh || a.title)}</h3><div class="paper-en">${escape(a.title)}</div>
+      <h3 class="paper-title">${escape(a.title_zh || a.title)}</h3><div class="paper-en">${escape(a.title)}</div>${publicationLine(a)}
       <p class="paper-summary"><b>研究问题：</b>${escape(a.problem || '待阅读原文后核验')}</p>
       <div class="paper-relevance"><b>与你的研究关联：</b> ${escape(a.relevance || '此条由数据库自动发现，关联性尚未人工评估。')}</div>
       <div class="paper-footer"><div class="venue"><span class="venue-mark">${a.type === 'insight' ? 'N' : 'P'}</span><span title="${escape(a.status || '')}">${escape(a.venue || a.source || '来源待核实')} · ${escape(a.status || '未核实')}</span></div><div class="card-actions"><a class="link-action" href="${escape(url(a.url) || '#')}" target="_blank" rel="noopener noreferrer">原文 ↗</a><button class="save-action ${isSaved ? 'saved' : ''}" data-save="${escape(a.id)}" aria-label="${isSaved ? '取消收藏' : '收藏'}" title="${isSaved ? '取消收藏' : '收藏'}">${isSaved ? '★' : '☆'}</button><button class="detail-action" data-detail="${escape(a.id)}">查看解读 →</button></div></div></article>`;
@@ -63,6 +93,7 @@
     $('cardList').innerHTML = list.length ? list.map(card).join('') : `<div class="empty-state"><div class="empty-symbol">⌁</div><strong>当前条件下没有匹配内容</strong><small>可调整时间范围、研究方向或关键词。没有新论文并不代表自动补造更新；宁缺毋滥。</small></div>`;
     $('listFooter').textContent = `显示 ${list.length} 条 · ${state.items.length} 条总收录 · 仅“人工精选”包含人工研究解读；其他为自动发现候选`;
     renderSignals();
+    renderDaily();
   }
   function renderSignals() {
     const keys = [ ['动态图','动态图'], ['交通预测','交通预测'], ['事件','事件/异常'], ['多模态','多模态'], ['泛化','跨域泛化'] ];
@@ -75,6 +106,8 @@
     const a = state.items.find(x => x.id === id); if (!a) return;
     const topics = [typeName(a),a.category,a.status].filter(Boolean).map(t => `<span class="tag tag-secondary">${escape(t)}</span>`).join('');
     $('modalContent').innerHTML = `<h2 class="modal-title" id="detailTitle">${escape(a.title_zh || a.title)}</h2><div class="modal-en">${escape(a.title)}</div><div class="modal-meta">${topics}<span class="tag tag-gray">${pretty(a.date)}</span></div>
+      ${publicationLine(a)}
+      <section class="modal-section"><h4>00 · 刊会评级与核验依据</h4><p>发表类型：${publicationName(a.publication_type)}<br>简称：${escape(a.venue_abbr||'待核验')}<br>全称：${escape(a.venue_full||a.venue||'待核验')}<br>CCF 收录：${a.ccf_listed===true?'是':a.ccf_grade==='不适用'?'不适用':'尚未核实'} · ${escape(a.ccf_grade||'待核验')} ${escape(a.ccf_edition||'')}<br>中科院分区：${escape(a.cas_zone||'待核验')} ${escape(a.cas_edition||'')}<br>${a.ccf_source&&url(a.ccf_source)?`<a href="${escape(url(a.ccf_source))}" target="_blank" rel="noopener noreferrer">CCF目录核验 ↗</a>`:'CCF目录待核验'}${a.cas_source&&url(a.cas_source)?` · <a href="${escape(url(a.cas_source))}" target="_blank" rel="noopener noreferrer">中科院停更公告 ↗</a>`:''}<br>交叉发现源：${escape((a.discovered_via||[a.source]).join(' / '))}</p></section>
       <section class="modal-section"><h4>01 · 研究问题 / Existing gap</h4><p>${escape(a.problem || '研究问题待全文阅读与核验。')}</p></section>
       <section class="modal-section"><h4>02 · 核心方法 / Method</h4><p>${escape(a.method || '自动候选：仅记录原始元数据，请查看原文核验核心方法。')}</p></section>
       <section class="modal-section"><h4>03 · 贡献与证据 / Contribution</h4><p>${escape(a.contribution || '待人工审阅，数据库自动收录不代表已验证创新性。')}</p></section>
@@ -103,6 +136,8 @@
     $('searchInput').addEventListener('input',(e)=>{state.search=e.target.value.trim();render();});
     $('timeFilter').addEventListener('change',(e)=>{state.days=e.target.value;render();});
     $('sortFilter').addEventListener('change',(e)=>{state.sort=e.target.value;render();});
+    $('publicationTypeFilter').addEventListener('change',(e)=>{state.publication=e.target.value;render();});
+    $('ccfGradeFilter').addEventListener('change',(e)=>{state.ccf=e.target.value;render();});
     $('cardList').addEventListener('click',(e)=>{const save=e.target.closest('[data-save]'),details=e.target.closest('[data-detail]');if(save){const id=save.dataset.save;if(state.saved.has(id)){state.saved.delete(id);toast('已取消收藏');}else{state.saved.add(id);toast('已收藏到本地浏览器');}saveState();render();}if(details){detail(details.dataset.detail);}});
     $('mobileMenu').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
     $('heroExplore').addEventListener('click',()=>{$('feedSection').scrollIntoView({behavior:'smooth'});state.sort='curated';$('sortFilter').value='curated';render();});
