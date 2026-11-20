@@ -1,12 +1,12 @@
-name: Weekly Research Watch + GitHub Pages
+name: Daily Research Watch + GitHub Pages
 
 on:
   push:
     branches: [main]
   schedule:
-    # Friday 09:00 Asia/Shanghai / Asia/Manila = Friday 01:00 UTC.
+    # Every day at 09:00 Beijing time (Asia/Shanghai) = 01:00 UTC.
     # GitHub scheduled workflows may start later than the exact minute.
-    - cron: '0 1 * * 5'
+    - cron: '0 1 * * *'
   workflow_dispatch:
 
 permissions:
@@ -45,7 +45,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add site/data.json site/seed.js
           if ! git diff --cached --quiet; then
-            git commit -m 'chore: refresh weekly research metadata'
+            git commit -m 'chore: refresh daily research metadata'
             git pull --rebase origin main
             git push origin HEAD:main
           fi

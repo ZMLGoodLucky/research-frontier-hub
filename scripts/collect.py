@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Weekly traffic forecasting literature collector.
+"""Daily traffic forecasting literature collector.
 
 No LLM inference and no invented journal ranking. Requires only Python stdlib.
 OpenAlex/arXiv/RSS are discovery sources; expert judgments go in data/curated.json.

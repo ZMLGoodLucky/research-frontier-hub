@@ -10,7 +10,7 @@
 
 1. 将此 ZIP 解压，把内部所有文件与文件夹上传到仓库 **根目录**，包括隐藏目录 `.github/workflows/`、`site/`、`scripts/`、`config/`、`data/`、`README.md`。
 2. 进入仓库 **Settings → Pages**，在 **Build and deployment → Source** 下选择 **GitHub Actions**。
-3. 打开仓库 **Actions → Weekly Research Watch + GitHub Pages → Run workflow**。首次发布可能需要手动触发一次。
+3. 打开仓库 **Actions → Daily Research Watch + GitHub Pages → Run workflow**。首次发布可能需要手动触发一次。
 4. 到 **Settings → Pages** 查看实际部署链接。一般为：`https://zmlgoodlucky.github.io/research-frontier-hub/`。该地址只有 Pages 成功发布后才可用。
 
 > 如果仓库没有上传按钮，请进入 Code → Add file → Upload files，并拖入解压后的文件。**注意**：网页版上传有时无法可靠保留 `.github` 隐藏目录和嵌套目录结构。建议使用 GitHub Desktop 或在仓库根目录上传后逐级检查文件路径。使用 Git 命令见后文。
@@ -26,11 +26,11 @@ git commit -m "feat: launch FrontierLab research dashboard"
 git push origin main
 ```
 
-### 每周自动更新
+### 每日自动更新
 
-GitHub Actions 计划 **每周五北京时间 09:00（UTC 周五 01:00）**运行；GitHub 定时任务可能延迟。它将：
+GitHub Actions 计划 **每天北京时间 09:00（UTC 01:00）**运行；GitHub 定时任务可能延迟。无新成果时不会杜撰新条目，仍会保存采集状态。它将：
 
-1. 使用 OpenAlex 检索发表日期位于最近14天的道路交通预测相关论文；
+1. 使用 OpenAlex 检索发表日期位于最近14天的道路交通预测相关论文（14 天是漏检回补窗口，并不代表每天都会新增论文）；
 2. 使用 arXiv API 发现新增预印本；
 3. 使用 MIT News RSS 发现与交通或时空建模有关的机构资讯（无匹配时为零）；
 4. 去重并保存 `site/data.json` 和 `site/seed.js`，随后重新部署站点。
@@ -48,7 +48,7 @@ GitHub Actions 计划 **每周五北京时间 09:00（UTC 周五 01:00）**运�
 | `data/curated.json` | 人工核实与精选记录，优先于自动候选 |
 | `data/feeds.json` | 高校等机构 RSS 列表 |
 | `config/interests.json` | 研究方向、关键词、自动收集时间范围 |
-| `scripts/collect.py` | 每周采集程序，仅 Python 标准库 |
+| `scripts/collect.py` | 每日采集程序，仅 Python 标准库 |
 | `.github/workflows/research-weekly.yml` | GitHub 定时更新与 Pages 发布工作流 |
 
 **新增公众号文章**：在 `data/curated.json` 新增 `type: "insight"` 的对象，保留真实原文链接、发布日期、发布主体、中文研究解读。由于微信公众号不提供可靠的开放检索 API，此站默认不自动抓取公众号内容，更不会伪造某公众号的内容。

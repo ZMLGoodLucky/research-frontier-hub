@@ -87,7 +87,7 @@
   }
   function closeModal(){ $('modalBackdrop').hidden = true; document.body.style.overflow = ''; }
   function method(){
-    $('modalContent').innerHTML = `<h2 class="modal-title" id="detailTitle">关于内容筛选、学术评级与可靠性</h2><div class="modal-en">Evidence before impressions · 以事实为先</div><section class="modal-section"><h4>论文发现</h4><p>使用 OpenAlex、arXiv 论文元数据检索。程序按题目与摘要过滤交通流预测相关主题，并对 DOI / 链接去重。自动抓取属于候选清单，不意味着阅读全文、评审结论或领域排名。</p></section><section class="modal-section"><h4>人工精选</h4><p>人工记录研究问题、技术方法、与已有研究的关系及可能验证点。每条保留直接原文链接；未能独立核实的事实不会转化成确定性结论。</p></section><section class="modal-section"><h4>中科院分区 / JCR / CCF</h4><p>三个体系不同，分区还区分版本与年份。程序不根据期刊名直接推断等级；如未查询到对应年份的官方分区或会议名录，显示“待核实”。arXiv 是预印本平台，不能用其分类代替会议录用证明。</p></section><section class="modal-section"><h4>微信公众号</h4><p>公众号通常没有稳定开放的官方检索接口，默认仅人工收录有完整、公开、可核验链接的文章，不爬取受保护内容，也不伪造来源。</p></section><section class="modal-section"><h4>时间范围与数据可靠性</h4><p>“近7天”是根据来源发布日期计算，并非网页上一次刷新时间。GitHub Actions 计划每周五 09:00（北京时间）运行；实际执行时间可能有延迟，失败时保留已有数据，不会伪装已更新。</p></section>`;
+    $('modalContent').innerHTML = `<h2 class="modal-title" id="detailTitle">关于内容筛选、学术评级与可靠性</h2><div class="modal-en">Evidence before impressions · 以事实为先</div><section class="modal-section"><h4>论文发现</h4><p>使用 OpenAlex、arXiv 论文元数据检索。程序按题目与摘要过滤交通流预测相关主题，并对 DOI / 链接去重。自动抓取属于候选清单，不意味着阅读全文、评审结论或领域排名。</p></section><section class="modal-section"><h4>人工精选</h4><p>人工记录研究问题、技术方法、与已有研究的关系及可能验证点。每条保留直接原文链接；未能独立核实的事实不会转化成确定性结论。</p></section><section class="modal-section"><h4>中科院分区 / JCR / CCF</h4><p>三个体系不同，分区还区分版本与年份。程序不根据期刊名直接推断等级；如未查询到对应年份的官方分区或会议名录，显示“待核实”。arXiv 是预印本平台，不能用其分类代替会议录用证明。</p></section><section class="modal-section"><h4>微信公众号</h4><p>公众号通常没有稳定开放的官方检索接口，默认仅人工收录有完整、公开、可核验链接的文章，不爬取受保护内容，也不伪造来源。</p></section><section class="modal-section"><h4>时间范围与数据可靠性</h4><p>“近7天”是根据来源发布日期计算，并非网页上一次刷新时间。GitHub Actions 计划每天 09:00（北京时间）运行；实际执行时间可能有延迟，失败时保留已有数据，不会伪装已更新。</p></section>`;
     $('modalBackdrop').hidden=false; document.body.style.overflow='hidden';
   }
   function exportSaved(){
@@ -115,8 +115,8 @@
   async function load(){
     const now = new Date();const shanghai = new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'long',day:'numeric',weekday:'long'}).format(now);
     $('todayLabel').textContent = shanghai;
-    const iso = today();const d = new Date(iso+'T00:00:00Z');const week = Math.ceil(((d-new Date(Date.UTC(d.getUTCFullYear(),0,1)))/86400000+1)/7);
-    $('heroWeek').textContent = `${d.getUTCFullYear()} / 第 ${week} 周`;
+    const iso = today();const d = new Date(iso+'T00:00:00Z');
+    $('heroWeek').textContent = `${iso.slice(0,4)}.${iso.slice(5,7)}.${iso.slice(8,10)}`;
     try {
       let data;try { const r=await fetch('data.json',{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status); data=await r.json(); } catch(err) { if(!window.FRONTIER_INITIAL_DATA)throw err;data=window.FRONTIER_INITIAL_DATA; }
       if(!Array.isArray(data.items))throw Error('数据格式无效');
