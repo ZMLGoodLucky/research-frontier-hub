@@ -1,4 +1,4 @@
-name: Daily Research Watch (No Public Site Deployment)
+name: Daily Research Watch + GitHub Pages
 
 on:
   push:
@@ -11,14 +11,19 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
-  group: frontierlab-private-research
+  group: frontierlab-pages
   cancel-in-progress: false
 
 jobs:
-  collect-research:
+  collect-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -54,3 +59,14 @@ jobs:
             git pull --rebase origin main
             git push origin HEAD:main
           fi
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
