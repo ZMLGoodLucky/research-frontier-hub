@@ -76,5 +76,15 @@
     "kind": "paper",
     "format": "manual",
     "note": "支持站内自定义RSS订阅，需要用户生成订阅地址后才能自动收录"
+  },
+  {
+    "name": "MIT News · Research",
+    "organization": "MIT News",
+    "url": "https://news.mit.edu/rss/research",
+    "enabled": true,
+    "kind": "insight",
+    "venue": "MIT News",
+    "format": "rss",
+    "note": "MIT官方研究新闻RSS；按道路交通、事件及交通预测关键词过滤，新闻非论文"
   }
 ]

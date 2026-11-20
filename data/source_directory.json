@@ -34,5 +34,61 @@
     "url": "https://news.mit.edu/",
     "integration": "官方人工智能主题RSS，筛选交通相关研究资讯",
     "automatic": true
+  },
+  {
+    "name": "CARSI · 高校学术资源门户",
+    "url": "https://ds.carsi.edu.cn/resource/resource.php",
+    "category": "campus",
+    "automatic": false,
+    "auth": "需本人使用学校统一身份认证",
+    "integration": "学校订阅数据库目录，不能作为公开爬虫数据源；仅跳转本人授权的全文资源"
+  },
+  {
+    "name": "MIT News · Transportation",
+    "url": "https://news.mit.edu/topic/transportation",
+    "category": "news",
+    "automatic": false,
+    "auth": "公开",
+    "integration": "交通研究新闻与原论文线索；来源网页直接访问"
+  },
+  {
+    "name": "MIT News · Research RSS",
+    "url": "https://news.mit.edu/rss/research",
+    "category": "news",
+    "automatic": true,
+    "auth": "公开",
+    "integration": "官方研究新闻RSS，程序按道路交通研究相关性筛选，未承诺全部条目有论文"
+  },
+  {
+    "name": "中国科学院 · 科学研究",
+    "url": "https://www.cas.cn/kxyj/",
+    "category": "news",
+    "automatic": false,
+    "auth": "公开",
+    "integration": "官方科研新闻入口；手动核对原始论文或成果来源"
+  },
+  {
+    "name": "中国科学院 · 微信公开资讯",
+    "url": "https://www.cas.cn/newmedia/weixin/",
+    "category": "wechat_public",
+    "automatic": false,
+    "auth": "公开",
+    "integration": "公开公众号文章索引；不读取个人微信账号或关注列表"
+  },
+  {
+    "name": "TRB Weekly",
+    "url": "https://www.trb.org/Main/PubsTRBENewsletter.aspx",
+    "category": "news",
+    "automatic": false,
+    "auth": "公开",
+    "integration": "TRB官方每周研究动态；非通用RSS"
+  },
+  {
+    "name": "PubScholar · 科讯头条",
+    "url": "https://pubscholar.cn/headlines",
+    "category": "news",
+    "automatic": false,
+    "auth": "以运营方实际权限为准",
+    "integration": "中科院文献情报体系智能科研头条入口；能否使用以对方账户政策为准"
   }
 ]

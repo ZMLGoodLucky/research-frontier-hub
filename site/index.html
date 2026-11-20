@@ -34,6 +34,7 @@
         <button class="nav-item" data-page="insights" data-view="insight" type="button"><span class="nav-symbol">◈</span><span>权威资讯</span></button>
         <button class="nav-item" data-page="saved" data-view="saved" type="button"><span class="nav-symbol">☆</span><span>我的收藏</span></button>
         <a class="nav-item nav-external" href="https://www.letpub.com.cn/index.php?page=journalapp&view=search" target="_blank" rel="noopener noreferrer" title="LetPub 期刊影响因子与分区查询（第三方参考）"><span class="nav-symbol">⌕</span><span>期刊查询</span><span class="nav-outbound">↗</span></a>
+        <a class="nav-item nav-external" href="https://ds.carsi.edu.cn/resource/resource.php" target="_blank" rel="noopener noreferrer" title="通过学校统一身份认证访问许可范围内的学术资源（CARSI）"><span class="nav-symbol">▣</span><span>校园学术资源</span><span class="nav-outbound">↗</span></a>
       </nav>
       <div class="sidebar-divider"></div>
       <div class="nav-group-label">研究关注领域</div>
@@ -113,6 +114,39 @@
         <section class="daily-brief" id="dailyBrief" data-page-section="daily" aria-labelledby="dailyHeading">
           <div class="daily-brief-head"><div><span class="section-kicker">DAILY RESEARCH PICKS</span><h2 id="dailyHeading">每日研究精选 <span id="dailyDate" class="daily-date"></span></h2><p id="dailyDescription">自动筛选 3–5 篇可追溯的论文候选，不代替全文同行评议。</p></div><span class="daily-rule">真实来源 · 宁缺毋滥</span></div>
           <div id="dailyList" class="daily-pick-grid" aria-live="polite"><p class="daily-empty">正在读取每日精选记录…</p></div>
+        </section>
+        <section id="researchSourceHub" class="resource-hub" aria-labelledby="researchSourceTitle">
+          <div class="resource-hub-heading"><div><span class="section-kicker">SOURCE DIRECTORY · VERIFIED ACCESS PATHS</span><h2 id="researchSourceTitle">学术数据库与科研资讯来源</h2><p>学校订阅文献与公开科研资讯分开处理；保存原文链接，不转载付费全文。</p></div></div>
+          <div class="resource-hub-grid">
+            <article class="resource-hub-card resource-hub-campus">
+              <div class="resource-hub-card-head"><span class="resource-hub-icon">▣</span><span class="resource-hub-status">需要学校认证</span></div>
+              <h3>CARSI · 校园学术资源</h3>
+              <p>查看本校已订购的数据库。论文全文须按学校授权访问，不对外开放学校账号或批量转载内容。</p>
+              <a href="https://ds.carsi.edu.cn/resource/resource.php" target="_blank" rel="noopener noreferrer">进入 CARSI 资源门户 ↗</a>
+            </article>
+            <article class="resource-hub-card">
+              <div class="resource-hub-card-head"><span class="resource-hub-icon">✦</span><span class="resource-hub-status">公开资讯入口</span></div>
+              <h3>科学研究与学术新闻</h3>
+              <p>查找研究机构的新闻和论文线索；报道须追溯原始论文、DOI 或项目报告。</p>
+              <div class="resource-hub-links">
+                <a href="https://news.mit.edu/topic/transportation" target="_blank" rel="noopener noreferrer">MIT 交通研究 ↗</a>
+                <a href="https://www.cas.cn/kxyj/" target="_blank" rel="noopener noreferrer">中国科学院科研动态 ↗</a>
+                <a href="https://www.trb.org/Main/PubsTRBENewsletter.aspx" target="_blank" rel="noopener noreferrer">TRB Weekly ↗</a>
+                <a href="https://pubscholar.cn/headlines" target="_blank" rel="noopener noreferrer">科讯头条（权限以官网为准）↗</a>
+              </div>
+            </article>
+            <article class="resource-hub-card">
+              <div class="resource-hub-card-head"><span class="resource-hub-icon">◎</span><span class="resource-hub-status">公开文章 · 人工核查</span></div>
+              <h3>科研微信公众号资讯</h3>
+              <p>支持核查公开可访问的公众号文章与原论文。个人微信关注列表目前无法通过此网站读取。</p>
+              <div class="resource-hub-links">
+                <a href="https://www.cas.cn/newmedia/weixin/" target="_blank" rel="noopener noreferrer">中科院之声 · 微信公开资讯 ↗</a>
+                <a href="https://www.cas.cn/newmedia/" target="_blank" rel="noopener noreferrer">中科院新媒体资讯 ↗</a>
+              </div>
+              <p class="resource-hub-hint">后续可根据你提供的公众号名称或公开文章链接建立个人关注信源清单。</p>
+            </article>
+          </div>
+          <div class="resource-hub-legal"><strong>访问说明：</strong>CARSI 本身不提供统一的免费公开论文 API；校购数据库的全文只在授权范围内查看。公开新闻和公众号解读归入资讯，不自动计为正式期刊论文。</div>
         </section>
         <div class="body-grid" id="researchBody" data-page-section="research">
           <section class="feed-section" id="feedSection">
