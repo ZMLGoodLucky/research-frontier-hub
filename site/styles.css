@@ -148,3 +148,14 @@
 @media(max-width:1030px){.innovation-grid{grid-template-columns:1fr}.innovation-cadence{display:none}}
 @media(max-width:720px){.innovation-head{display:block}.innovation-head h2{font-size:calc(19px * var(--font-scale))}.innovation-head-marker{font-size:calc(9px * var(--font-scale))}.innovation-card{padding:16px}.innovation-lab{margin:20px 0}.innovation-summary span{padding:4px}.innovation-question{min-height:0}}
 @media(prefers-reduced-motion:reduce){.innovation-chevron{transition:none}}
+
+/* v1.4 narrow, evidence-led single-paper research studio */
+.idea-paper-tag{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0 0 11px}
+.idea-paper-tag span{display:inline-flex;align-items:center;border-radius:6px;border:1px solid #dfebf7;padding:4px 7px;background:#f6faff;color:#4e6a97;font-size:calc(10px * var(--font-scale));font-weight:700}
+.idea-paper-tag span:first-child{border-color:#cce8e6;background:#effaf8;color:#297f76}
+.idea-scope{border:1px solid #e2eaf7;background:linear-gradient(110deg,#f8fbff,#fff);border-radius:9px;padding:11px 12px;margin-top:11px}
+.idea-scope strong{font-size:calc(10px * var(--font-scale));color:#345e9e}
+.idea-scope p{margin:6px 0 0;color:#60788d;line-height:1.8;font-size:calc(10px * var(--font-scale))}
+.idea-killer{margin-top:14px;background:#f2f6ff;border:1px solid #dce8fb;border-left:3px solid #5a85cb;border-radius:9px;padding:10px 13px}
+.idea-killer strong{font-size:calc(11px * var(--font-scale));color:#2d568f}
+.idea-killer p{font-size:calc(11px * var(--font-scale));color:#576c8b;margin:7px 0 0;line-height:1.85}

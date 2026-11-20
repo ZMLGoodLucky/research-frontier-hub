@@ -1,158 +1,78 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "reviewed_on": "2026-11-20",
-  "policy": "候选科学问题，不代表已证实全球首创；“文献覆盖”仅指列出的论文在已核对标题和摘要中展示的范围，不能证明不存在其他相关工作。需在正式立题前阅读全文、复现并补充系统检索。",
+  "policy": "高水平期刊目标不等于已达到录用标准；仅基于可核查的代表论文和公开摘要评估可能的差异，仍需阅读全文与新近检索排查。若重叠或关键数据缺失，必须按止损条件更换题目而非扩大模型。",
   "ideas": [
     {
-      "id": "incident-arrival-boundary",
-      "track": "事件传播与预测",
-      "priority": "优先深入验证",
-      "title": "仅凭事故首报信息，能否联合预测冲击首次到达时间与未来影响边界？",
-      "question": "在事故发生后首个可用报送时刻，面对五分钟粒度、缺测与尚未传播到的节点，如何联合预测每个路段的冲击首次到达分布及未来受影响区域，并正确表示“尚未观测到”的不确定性？",
-      "why_deep": "传统多步速度 MAE 无法回答“哪个路段会先受影响、何时到达、边界扩张到哪里”。同一事故可能在上游形成排队冲击、在下游形成流量下降，两种信号的时滞与可观测性不同。",
-      "prior": [
-        {
-          "title": "Incident-Guided Spatiotemporal Traffic Forecasting (IGSTGNN)",
-          "year": "2026",
-          "did": "已提出事故上下文的空间融合及事故影响衰减建模，针对事件条件下的交通预测。",
-          "still": "其主要输出是交通预测；不能仅凭摘要认定已联合预测带区间删失的首次到达分布与空间边界。",
-          "url": "https://arxiv.org/abs/2602.02528"
-        },
-        {
-          "title": "An Operationally Interpretable Lag-Aware Directed Spatio-Temporal Graph Neural Network for Real-Time Freeway Traffic Forecasting (Traffic-DiMAGNet)",
-          "year": "2026",
-          "did": "利用方向性时滞传播信息改进短时高速流量预测，并讨论扰动传播路径。",
-          "still": "显式时滞表示与事故首报截点下的到达分布、未到达删失标签并不等价。",
-          "url": "https://www.mdpi.com/2673-7590/6/5/187"
-        },
-        {
-          "title": "Predicting the Impact of Traffic Incidents: An Evaluative Analysis",
-          "year": "2024",
-          "did": "研究刚发生事故的影响空间范围和未来延误预测。",
-          "still": "已经覆盖“范围预测”，因此单独预测影响范围不能作为创新；新的切入需与首次到达及不完整观测联合建模。",
-          "url": "https://doi.org/10.3233/ATDE240037"
-        },
-        {
-          "title": "Modeling spatiotemporal heterogeneity in interval-censored traffic incident time to normal flow",
-          "year": "2024",
-          "did": "对事故恢复至正常车流时间的区间删失与时空异质性进行了研究。",
-          "still": "区间删失本身并非新方法；本方向需要转向道路节点的冲击首次到达分布及动态影响边界。",
-          "url": "https://www.sciencedirect.com/science/article/pii/S0001457523004530"
-        }
-      ],
-      "gap": "目前核对的代表工作分别处理事件预测、时滞传播、影响范围及删失恢复时间；尚需检查是否有工作在同一事故首报时点联合预测“沿程首次到达概率—未到达删失—未来影响边界”，并提供时间/空间协同校准。",
-      "novelties": [
-        {
-          "title": "首报可用信息的时间封存与区间删失建模",
-          "mechanism": "建立每次预测的 as-of 信息账本，事件属性仅采用首报时点实际可用版本；五分钟传感器未能精确捕获的首次到达时间用区间标签，观测期未到达用右删失处理。",
-          "contribution": "从事后重构标签转为可复验的实时预测任务定义，不再把未来确认的持续时间或事故状态误当输入。"
-        },
-        {
-          "title": "有向时滞的双通道冲击到达分布网络",
-          "mechanism": "将上游排队冲击与下游流量响应拆成两个状态通道，以有向道路距离、时变拥堵条件和图传播滞后为输入，输出各节点的离散时间到达危险率与预测分布。",
-          "contribution": "不仅输出交通数值，还预测路段首次受到事件影响的时间分布，并兼顾“尚未到达”。"
-        },
-        {
-          "title": "到达时间—影响边界联合一致性与概率校准",
-          "mechanism": "将到达概率汇聚成未来动态受影响边界；联合优化生存似然、边界 IoU 与合理传播速度软约束，并对到达覆盖率和边界置信区间进行分组校准。",
-          "contribution": "使“何时到达”与“范围到哪里”在同一时空预测原点相互约束，而不是两个独立输出。"
-        }
-      ],
-      "data": [
-        {
-          "name": "XTraffic / IGSTGNN",
-          "url": "https://github.com/fanlixiang/IGSTGNN",
-          "note": "公开事件与交通对齐基准；须核查事故首次报告时间、道路对应和可用字段。"
-        },
-        {
-          "name": "TraffiDent",
-          "url": "https://xaitraffic.github.io/",
-          "note": "NeurIPS 2025 公布交通传感器与七类事件对齐数据；要核查事件记录粒度是否支持首报截点。"
-        }
-      ],
-      "validation": "事件级且时间先后严格分组；与 IGSTGNN、Traffic-DiMAGNet、独立范围预测对比；评价到达区间覆盖率、C-index/CRPS、影响边界 IoU、受影响节点 MAE、时滞误差和首报信息泄漏检查。",
-      "overlap": "影响范围、延迟图、事故恢复删失均已有先例。重点新颖性只可能来自同一首报时点的联合问题定义、双传播到达概率及边界联合校准；须检索近两年 event impact frontier / time-to-impact 研究。",
-      "feasibility": "中等偏高：标签构造、删失样本及首报字段最难。先做 100–300 起事件的人工核对试验。",
-      "match_terms": [
-        "incident",
-        "accident",
-        "traffic shockwave",
-        "arrival time",
-        "impact area",
-        "incident propagation",
-        "queue propagation",
-        "time-to-impact",
-        "boundary"
-      ],
-      "search_queries": [
-        "traffic incident propagation arrival impact",
-        "shockwave arrival boundary prediction",
-        "censored first arrival road incident"
-      ]
-    },
-    {
       "id": "event-evidence",
-      "track": "事件信息可信性",
-      "priority": "最适合扩展 ERTransPro",
-      "title": "事件模型的预测增益究竟来自首报信息，还是来自事后字段与常规交通模式？",
-      "question": "事故发生早期，事件属性可能缺漏、错误或频繁更新。如何区分事件首报真正提供的可泛化增益，与历史交通已能推断的拥堵、事后录入字段或数据划分泄漏造成的表观提升？",
-      "why_deep": "仅比较事件增强模型与无事件模型的整体 MAE，并不能证明模型准确利用了事故语义；高相关元数据可能根本无法在预测时获得，或仅反映已经出现的拥堵。",
+      "track": "事件条件预测 / 可信信息",
+      "priority": "候选 01 · 推荐优先",
+      "title": "事故首报什么时候值得信任？面向交通预测的事件增益鉴别与安全修正",
+      "question": "在同一预测时点，事件首报元数据是否真的提供了超出交通历史的可重复预测价值？模型如何识别无效或错误事件信息并避免比无事件预测更差？",
+      "why_deep": "顶刊更关心模型为什么在非周期事件下可靠，而不是简单在IGSTGNN上叠加门控。这个稿件只围绕“事件是否带来真实增益及何时不该使用”，以严格负控制实验直接检验机制。",
       "prior": [
         {
           "title": "Incident-Guided Spatiotemporal Traffic Forecasting (IGSTGNN)",
           "year": "2026",
-          "did": "通过空间事故上下文融合和时间影响衰减构造事件增强预测器。",
-          "still": "证明“事件融合可带来性能改善”不同于审计每一项事件字段在首报时点是否可获得。",
+          "did": "使用事故上下文空间融合和时间影响衰减改进交通预测。",
+          "still": "事件融合已做过；要检验增益是否在严格首报、事件错位与负控制下仍存在。",
           "url": "https://arxiv.org/abs/2602.02528"
-        },
-        {
-          "title": "Spatial-temporal incident-aware dynamic graph convolution networks for traffic flow prediction",
-          "year": "2026",
-          "did": "联合事件筛选、天气特征与动态图结构，研究外部因素对交通预测的影响。",
-          "still": "事件选择与多模态融合已存在；直接再加一个事件门控的创新性不足。",
-          "url": "https://www.sciencedirect.com/science/article/pii/S0957417425043040"
         },
         {
           "title": "TraffiDent: A Dataset for Understanding the Interplay Between Traffic Dynamics and Incidents",
           "year": "2025",
-          "did": "提供流量、占有率、速度与七种事件类型的时空对齐，含事件后预测及全局/局部因果分析任务。",
-          "still": "官方基准已涉及因果分析，因此不能笼统宣称“首次开展事故因果研究”；需要细化可识别条件与预测可用信息。",
-          "url": "https://papers.nips.cc/paper_files/paper/2025/hash/7813e19a86fd73d40f7e811ab15f6d5f-Abstract-Datasets_and_Benchmarks_Track.html"
+          "did": "公开对齐交通观测与七种事件类型，已有事件后预测和因果分析任务。",
+          "still": "不能宣称首创“事件因果”或事件基准；拟稿定位于首报预测效用和负控制审核。",
+          "url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/7813e19a86fd73d40f7e811ab15f6d5f-Abstract-Datasets_and_Benchmarks_Track.html"
+        },
+        {
+          "title": "Predicting the Impact of Traffic Incidents: An Evaluative Analysis",
+          "year": "2024",
+          "did": "评估了事故早期影响信息及不同类别预测差异。",
+          "still": "该稿不能只做“早期事件有用”结论，须用匹配负控制识别何时新增信息无效。",
+          "url": "https://journals.sagepub.com/doi/10.3233/ATDE240037"
+        },
+        {
+          "title": "Spatial–temporal uncertainty-aware graph networks for promoting accuracy and reliability of traffic forecasting",
+          "year": "2024",
+          "did": "预测不确定度与降低错误传播已有相关方法。",
+          "still": "不确定度门控本身不是新贡献；需要事件特异性负控制与安全修正证据。",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0957417423026453"
         }
       ],
-      "gap": "代表工作展示事件增强预测和多模态融合，但仍需系统核查在严格首报截点、字段延迟和事件更新噪声下的增益是否稳定；预测增益不能直接解释为因果效应。",
+      "gap": "IGSTGNN已有事件融合与衰减；最新事件预测研究也已处理天气、文本和动态结构。该稿件不主张事件融合原创，而是检验首报信息的增益是否通过事件错位、置换及缺失负控制后仍成立，并用可信度控制预测修正；这属于预测效用验证而非因果识别。",
       "novelties": [
         {
-          "title": "面向事故首报的版本化证据账本",
-          "mechanism": "为事件字段记录实际获取时间、修订历史和可用性掩码，并构造“首报可用 / 事后完整 / 人为延迟”三种输入协议。",
-          "contribution": "把事件引导预测从常见的特征拼接升级为可审计的信息可得性问题，并量化时点泄漏造成的性能虚增。"
+          "title": "事件增益的预测时点负控制鉴别协议",
+          "mechanism": "保持history-only预测与事件引导预测相同编码器、相同数据切分；构造事件时刻错位、事件类别置换与同拥堵程度无事件窗口匹配，测量条件化增益。",
+          "contribution": "将“事件提升MAE”变成可证伪、可复现的事件附加信息效用检验，而非把相关性误称因果。"
         },
         {
-          "title": "事件特异性增益与负控制对比学习",
-          "mechanism": "构造事故相似时段的无事故匹配窗口、事件时间错位和事件标签置换负控；用历史-only 背景分支作为基线，学习只有在额外信息成立时才启动的事件残差。",
-          "contribution": "区分模型是在响应真实事件信息，还是复述常规交通惯性；这属于预测证据审计，而非严格因果识别。"
+          "title": "事件—交通证据冲突的可信度估计",
+          "mechanism": "用事故属性可用性、事件位置不确定度以及首报与观测的相容程度训练一个可校准的可信度分数；不使用事故真实结束时间等未来属性。",
+          "contribution": "明确什么事故样本应该启用事件修正，何时应警惕错误报告或无效元数据。"
         },
         {
-          "title": "基于首报可信度的风险约束残差与拒答机制",
-          "mechanism": "结合字段缺失、报送延迟、事件文本可信度为事件冲击预测设置信任权重，并对预测修正幅度、异常置信区间和低可信样本设置可校准阈值。",
-          "contribution": "在错误首报或分布外事件下可主动退回历史预测分支，降低不可靠事件信息造成的负迁移。"
+          "title": "风险受限的事件残差回退机制",
+          "mechanism": "沿用ERTransPro的history-only背景分支，仅在可信度高于阈值且风险代理指标改善时启用有幅度上限的事件残差，否则回退背景预测。",
+          "contribution": "给出“无益不增强”的可解释机制，并通过负迁移率和事件子集结果检验，而非堆砌新型图模块。"
         }
       ],
       "data": [
         {
-          "name": "XTraffic",
+          "name": "XTraffic · Alameda + Contra Costa",
           "url": "https://github.com/fanlixiang/IGSTGNN",
-          "note": "可用于与 IGSTGNN 统一对比；事件更新版本、首次报告可用时间须先核查。"
+          "note": "主实验两县；先核验事故首报时间与属性记录是否有预测时点信息。无法核实时只能做‘记录可见时刻’条件，不能叫真正首报。"
         },
         {
-          "name": "TraffiDent",
+          "name": "TraffiDent · 可选第三基准",
           "url": "https://xaitraffic.github.io/",
-          "note": "可做七类事件外推与字段遮蔽，但报送时序信息是否充分仍需核验。"
+          "note": "可作为事件类型外推或外部检验，但先检查公开字段；如无一致协议则不强行合并。"
         }
       ],
-      "validation": "固定事故级 train/val/test 和同一 forecast origin；比较 history-only、首报事件、事后全部字段（仅诊断上限）、事件错位负控；分别评价受影响节点 MAE、Congestion-F1、概率校准及错误事件鲁棒性。",
-      "overlap": "事件门控、天气融合、事件后的因果关联分析已有大量工作。主张创新时必须强调首报字段可得性审计、增益负控、可信度约束，且避免把预测比较冒充因果识别。",
-      "feasibility": "中等：最重要的不是改网络，而是获得字段首次可见时间和修订记录。可以先做无需新标注的延迟/字段掩码负控研究。",
+      "validation": "固定两个区域的事故级分组与12步预测协议；五个不可缺组：history-only、原事件融合、首报可用融合、错位/置换负控制、可信度约束修正；报告整体和受扰节点MAE、RMSE、相对增益分布、负迁移率、ECE/校准曲线、事件类别与报送延迟分层及训练/推理开销。",
+      "overlap": "事件门控、上下文融合、常规不确定度估计均已有人做；可投稿层面的差异依赖于条件化负控制、真实预测时点、可信度约束后的负迁移改进，而非新门控名称。",
+      "feasibility": "优先推荐：利用已有ERTransPro分支、事件注入和XTraffic结果，优先设计对照实验而非大幅重做框架；核心风险在数据时间戳真实性。",
       "match_terms": [
         "incident",
         "accident",
@@ -168,78 +88,204 @@
         "incident aware traffic forecasting metadata reliability",
         "incident report latency leakage traffic prediction",
         "robust incident-conditioned forecasting"
-      ]
+      ],
+      "paper_title_en": "When Should Incident Reports Be Trusted? Decision-Time Event-Value Auditing for Robust Traffic Forecasting",
+      "paper_type": "独立方法论文",
+      "paper_scope": "只研究已报告事故的短时交通预测，分析事件元数据相对于history-only基线的边际增益；不扩展成事件识别、事故传播范围、恢复时间等多任务。",
+      "hypothesis": "事故元数据对交通预测的增益具有可识别条件；事件—历史不一致的样本若采用风险受限的事件残差，而非无条件融合，有望降低错误事件信息造成的负迁移。",
+      "key_experiment": "用完全相同的history-only分支，对真实事件、置换事件和随机错位事件做成对对比。若真实事件并未稳定超过负控制，或可靠性门控无法降低负迁移率，核心创新失败。",
+      "stop_condition": "若数据缺少首报可见性及事件修改时间，先将题目从‘首报’改成‘事件记录可用时刻’并公开披露，不得用事后字段虚报实时部署。",
+      "scope_size": "1个核心问题 · ERTransPro小幅修改 · 2个县 · 5组证据性实验",
+      "venue_fit": "首选目标：Transportation Research Part C、IEEE Transactions on Intelligent Transportation Systems；如果缺乏可复核预测时点、显著提升或机制证据，应先完成基础版而非宣称顶刊级贡献。",
+      "decision": "建议优先启动",
+      "required_checks": [
+        "事件首报是否有可信的首次可用时间？",
+        "负控制是否真的排除历史交通与季节性捷径？",
+        "增益差异是否在两县和多随机种子上成立？"
+      ],
+      "core_claim": "在真实预测可用信息约束下，识别事件元数据何时有价值，并以可信度约束事件修正以降低无益或错误信息带来的负迁移。",
+      "paper_ready": true
     },
     {
-      "id": "graph-credibility",
-      "track": "多视角与自监督",
-      "priority": "最适合扩展 MVST-DSSL",
-      "title": "当节点缺失、噪声和城市迁移同时出现，动态图上的“有向依赖”还有多大可信度？",
-      "question": "交通预测网络可学出有方向的时滞边，但面对传感器缺测、事件扰动和跨城市分布偏移，不同空间视角得出的有向依赖可能矛盾。模型能否识别边可信度，避免低置信动态图传播错误并给出校准预测？",
-      "why_deep": "传统 MAE 提升不能证明动态图稳定或真实。动态图经常受训练批次、传感器密度与数据分布影响；若把不可靠的预测依赖当成确定图，容易在事件场景放大噪声。",
+      "id": "incident-arrival-boundary",
+      "track": "事故传播 / 概率预测",
+      "priority": "候选 02 · 高风险高潜力",
+      "title": "首报后哪些路段会先受事故影响？区间删失的冲击首次到达预测",
+      "question": "给定预测时刻可用的事故首报与前12/24个交通观测点，能否在5分钟采样和右删失条件下，为每个可达上游路段提供校准的首次受影响时间分布？",
+      "why_deep": "目前已有道路事故空间影响预测、方向性传播图以及交通事件持续时间的生存分析；本稿仅聚焦决策时点的“路段首次被影响”概率预测及其可校准性，避免将多个任务硬凑成博士级课题。",
       "prior": [
         {
-          "title": "Spatio-Temporal Self-Supervised Learning for Traffic Flow Prediction (ST-SSL)",
-          "year": "2023",
-          "did": "已引入属性级、结构级自适应增强及空间/时间异质性自监督学习。",
-          "still": "结构增强和双重自监督已有人做；必须提出边可信度、跨视角冲突和校准新目标，不能只重复对比学习。",
-          "url": "https://ojs.aaai.org/index.php/AAAI/article/view/25555"
+          "title": "Predicting the Impact of Traffic Incidents: An Evaluative Analysis",
+          "year": "2024",
+          "did": "已预测事故未来影响的空间范围和行程延误，直接覆盖“影响范围”研究。",
+          "still": "本稿需避开重复范围预测，专注路段首次影响到达的区间/右删失概率分布与预测时点可用性。",
+          "url": "https://journals.sagepub.com/doi/10.3233/ATDE240037"
         },
         {
-          "title": "STSD: Modeling Spatial Temporal Staticity and Dynamicity in Traffic Forecasting",
-          "year": "2023",
-          "did": "把静态、动态图结构与时空表示结合，并包含自监督对比预训练。",
-          "still": "静/动态图融合也不是空白；新问题应针对观测可靠性变化时，哪些边值得信任。",
-          "url": "https://ieeexplore.ieee.org/abstract/document/10415732"
-        },
-        {
-          "title": "Traffic-DiMAGNet: An Operationally Interpretable Lag-Aware Directed Spatio-Temporal Graph Neural Network",
+          "title": "Incident-Guided Spatiotemporal Traffic Forecasting (IGSTGNN)",
           "year": "2026",
-          "did": "方向与时滞依赖的交通图传播已有针对性研究。",
-          "still": "有向时滞本身已有先例；需要证明不确定度估计和边失真鲁棒性带来额外价值。",
+          "did": "事故信息融合用于交通预测与事故影响衰减。",
+          "still": "预测连续交通指标与首次受影响到达概率不是同一输出；但需检查论文方法和附录是否已有相同到达标签。",
+          "url": "https://arxiv.org/abs/2602.02528"
+        },
+        {
+          "title": "An Operationally Interpretable Lag-Aware Directed Spatio-Temporal Graph Neural Network for Real-Time Freeway Traffic Forecasting (Traffic-DiMAGNet)",
+          "year": "2026",
+          "did": "有向时滞传播与交通短时预测已出现。",
+          "still": "时滞图本身不能主张新颖，必须验证删失生存目标的必要性。",
           "url": "https://www.mdpi.com/2673-7590/6/5/187"
         },
         {
-          "title": "Adaptive Spatio-Temporal Self-Supervised Traffic Flow Prediction Method Based on Contrastive Learning",
-          "year": "2026",
-          "did": "针对缺失、噪声与时空差异采用自监督/对比学习思路。",
-          "still": "单独添加掩码增强或对比学习不构成新贡献，必须构建可解释的结构可靠性检验。",
-          "url": "https://www.mdpi.com/2079-9292/15/11/2238"
+          "title": "Deep survival analysis model for incident clearance time prediction",
+          "year": "2024",
+          "did": "事故清障时间已有生存风险预测研究。",
+          "still": "清障/恢复时间不同于路段冲击初次抵达时间，危险率函数不能作为原创方法宣称。",
+          "url": "https://trid.trb.org/View/2550896"
         }
       ],
-      "gap": "自监督、静动态图融合和时滞方向建模都有现有工作；需要验证是否已有统一方法为多视角动态图的边赋予可校准可信度，并在缺测、噪声与跨域迁移下主动收缩不可靠传播。",
+      "gap": "已查阅代表性研究表明事故影响范围预测与滞后有向图各自存在，但针对首报时点、5分钟区间删失和未到达右删失的沿程首次影响时刻概率预测，仍需进一步系统排查相近工作；不得断言无人解决。",
       "novelties": [
         {
-          "title": "四视角动态图结构可信度估计",
-          "mechanism": "利用地理、语义、枢纽及有向时滞四视角的边一致性、采样扰动稳定性和节点缺失比例构建边级可信度分布；只让高可信动态边对预测产生较大贡献。",
-          "contribution": "不只学习一张动态图，还显式评估“哪些边在当前观测条件下足够可信”。"
+          "title": "单一预测截点下的区间删失首次影响目标",
+          "mechanism": "从事故首报时刻构造路段首次显著速度下降区间；对未观察到冲击的路段显式标右删失，预测时只使用截点之前可得记录。",
+          "contribution": "给出可复验且符合5分钟观测分辨率的任务及标签定义，避免把未到达样本错误归类。"
         },
         {
-          "title": "传播时滞一致性的自监督约束",
-          "mechanism": "使用跨时间窗口的可观测到达顺序、上下游传播滞后及稳定子图作为自监督信号，使低置信边的时滞预测具有更宽的可信区间。",
-          "contribution": "把自监督目标从普通重建/对比扩展到有向预测依赖的时间一致性，明确不等同因果关系。"
+          "title": "有向路段传播约束的离散危险率模型",
+          "mechanism": "在现有轻量时空编码器上输出路段逐步危险率，以道路方向、沿程距离和可观测拥堵强度限制不合理传播；不另造多分支大框架。",
+          "contribution": "用一个明确的概率输出替代回归点估计，体现道路传播机制对时间分布的约束。"
         },
         {
-          "title": "跨域结构退火与不确定度校准的自适应预测",
-          "mechanism": "在 PeMS→METR-LA 等跨网络测试中，按边可信度与残差分布漂移动态调整结构融合权重；对于不确定度高的道路输出区间或回退稳健先验。",
-          "contribution": "将跨区域泛化、结构稳定性和可信预测联结为一个可验证的可靠性目标。"
+          "title": "不同拥堵初态下的覆盖率条件校准",
+          "mechanism": "通过截点前拥堵状态分组、危险率单调累积和后验校准，报告每组到达窗口的覆盖率及CRPS。",
+          "contribution": "证明模型不是仅提高平均误差，而能在拥堵程度变化时给出可用的风险时间窗。"
         }
       ],
       "data": [
         {
-          "name": "PeMS03/04/07/08",
-          "url": "https://github.com/guoshnBJTU/ASTGNN",
-          "note": "标准交通预测基准；需核实各公开版本与预处理划分的一致性。"
+          "name": "XTraffic · Alameda / Contra Costa",
+          "url": "https://github.com/fanlixiang/IGSTGNN",
+          "note": "沿用两县数据，须先验证首报时间、传感器匹配、5分钟对齐与受扰判定是否能够可靠重建；若无法验证即中止主方案。"
         },
         {
-          "name": "METR-LA / PEMS-BAY",
-          "url": "https://github.com/liyaguang/DCRNN",
-          "note": "经典速度预测公开数据与处理代码；跨图迁移需统一输入、时间对齐和节点规模。"
+          "name": "TraffiDent（可选外部验证）",
+          "url": "https://xaitraffic.github.io/",
+          "note": "NeurIPS 2025 数据公开，是否有足够时点信息用于“首报”实验需重新核查。"
         }
       ],
-      "validation": "在固定随机种子下执行 MCAR/连续缺测/错误边/感应器漂移/跨城市 zero-shot；对比 ST-SSL、STSD、D2STGNN 和现有 MVST-DSSL；报告 12-step MAE、图结构 Jaccard 稳定性、滞后误差、区间覆盖率、参数量及推理延迟。",
-      "overlap": "动态 Granger-inspired、有向时滞、多图融合、掩码重建和图对比均有相关先例。新颖性不在模块名称，而在边级可靠性可校准与结构失效时的选择性预测。",
-      "feasibility": "中等偏高：现有 MVST-DSSL 可复用四视角编码器；新增可靠性评估和严格的分布偏移协议，成本相对可控。",
+      "validation": "核心实验控制在两县：与恒定危险率、Cox/离散生存模型、事件时空回归与IGSTGNN编码器加到达输出头对比；报告区间删失NLL、时间CRPS、90%到达窗覆盖率、受影响路段排序与时滞分组；消融“去删失/去方向约束/去校准”。",
+      "overlap": "空间影响预测、时滞图和生存分析均已有先例；创新必须成立于“实时首报截点 + 路段首次到达的删失概率分布 + 传播约束与校准”的具体组合，不能宣称首次引入生存分析。",
+      "feasibility": "风险较高：首报时间和首次影响标签是否可验证决定能否成稿。若可用，可缩成一篇方法型交通事件论文。",
+      "match_terms": [
+        "incident",
+        "accident",
+        "traffic shockwave",
+        "arrival time",
+        "impact area",
+        "incident propagation",
+        "queue propagation",
+        "time-to-impact",
+        "boundary"
+      ],
+      "search_queries": [
+        "traffic incident propagation arrival impact",
+        "shockwave arrival boundary prediction",
+        "censored first arrival road incident"
+      ],
+      "paper_title_en": "First-Impact Arrival Forecasting after Traffic Incident Reports with Censor-Aware Directed Propagation",
+      "paper_type": "独立方法论文",
+      "paper_scope": "仅研究事故首报后60分钟内、相邻上游路段的首次显著受扰时间分布；暂不同时做影响边界、持续时间、恢复时间及完整交通流预测。",
+      "hypothesis": "相较于直接回归单一到达时刻，显式处理时间分辨率与尚未到达的右删失、并利用有向传播顺序，可以更稳定地预测冲击到达窗口。",
+      "key_experiment": "在相同首报截点与相同上游节点集合上，比较区间覆盖率与预测时间窗宽度；若覆盖率没有优于简单离散生存基线，方法主张不成立。",
+      "stop_condition": "先检查100起事故的道路匹配与首报字段。如果无法可靠定义首次影响区间，放弃此方向，不用事后字段伪造标签。",
+      "scope_size": "1个主预测目标 · 1个统一模型 · 2个区域 · 3项关键消融",
+      "venue_fit": "候选：Transportation Research Part C、IEEE Transactions on Intelligent Transportation Systems；要求传播/不确定度的实证增益，不保证符合编辑门槛。",
+      "decision": "有条件推进",
+      "required_checks": [
+        "能取得首报时点吗？",
+        "受扰首次出现的标注规则是否稳定？",
+        "两县是否有足够未到达/删失样本？"
+      ],
+      "core_claim": "把事故影响的“首次到达时刻”从确定性点值预测变成删失感知且可校准的沿程概率分布。",
+      "paper_ready": true
+    },
+    {
+      "id": "graph-credibility",
+      "track": "可靠动态图 / 缺测预测",
+      "priority": "候选 03 · 需严格去重",
+      "title": "传感器持续缺测时，哪些自适应图边仍然值得传播？",
+      "question": "在局部传感器长时段缺测时，能否从多视角图的边级意见分歧中识别不可靠信息通道，并有选择地减弱其消息传播，从而减少完整节点的误差传染？",
+      "why_deep": "顶刊级重点不是把缺测、动态图和自监督三个模块并列堆上，而是解决局部缺测经动态图传播放大误差的机制，并用错误传播的定位图和阻断对照实验支撑。",
+      "prior": [
+        {
+          "title": "Availability-conditioned spatial compensation for traffic forecasting with incomplete observations",
+          "year": "2026",
+          "did": "明确将观测可用性纳入输入编码、空间图来源与动态融合。",
+          "still": "与本稿直接竞争；需要证明边级跨视角冲突比节点可用性权重提供额外信息。",
+          "url": "https://link.springer.com/article/10.1007/s10791-026-10611-1"
+        },
+        {
+          "title": "Dual-graph adversarial learning for joint traffic imputation and prediction with unobserved nodes",
+          "year": "2026",
+          "did": "研究完全无观测节点的双图结构与联合插补预测。",
+          "still": "不能再将块缺测或双图补偿作为原创任务；本稿主要评估错误图边向可观测邻居的传播。",
+          "url": "https://www.sciencedirect.com/science/article/pii/S1568494626021198"
+        },
+        {
+          "title": "Spatial–temporal uncertainty-aware graph networks for promoting accuracy and reliability of traffic forecasting",
+          "year": "2024",
+          "did": "显式学习预测不确定度并通过门控减轻错误信息传播。",
+          "still": "一般不确定度门控已有；本稿的可区别点是视角冲突驱动的边级可靠性及定向传播阻断。",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0957417423026453"
+        },
+        {
+          "title": "Spatio-Temporal Self-Supervised Learning for Traffic Flow Prediction (ST-SSL)",
+          "year": "2023",
+          "did": "已使用自适应数据增强和结构自监督学习。",
+          "still": "多视角/对比学习不是新增贡献；若仅重用掩码和图对比会高度重叠。",
+          "url": "https://ojs.aaai.org/index.php/AAAI/article/view/25555"
+        },
+        {
+          "title": "Physics-constrained dynamic graph and multi-resolution temporal modeling for traffic forecasting",
+          "year": "2026",
+          "did": "已涉及传感器可靠性加权、物理约束、动态结构学习与缺测噪声鲁棒。",
+          "still": "高度近邻：需要将贡献锁定在可解释的边级分歧指标及传播错误定位，而非泛化地称可靠动态图。",
+          "url": "https://www.sciencedirect.com/science/article/pii/S002002552600842X"
+        }
+      ],
+      "gap": "2026年已有基于传感器可用性的动态图融合、无观测节点的联合插补预测以及不确定度传播研究；因此本稿不应再主张‘缺测感知动态融合’本身新颖。必须把创新收缩到边级跨视角冲突的可靠性估计及选择性传播的实证可证伪性。",
+      "novelties": [
+        {
+          "title": "跨视角边冲突的局部可靠性度量",
+          "mechanism": "固定地理、语义、关键节点、有向时滞四视角，比较缺测前后相同候选边的强度秩、方向与时滞分歧，得到观测条件化的边级置信分数。",
+          "contribution": "研究对象从“节点是否缺测”转移到“图传播边是否因为缺测而失真”，并能可视化失真边。"
+        },
+        {
+          "title": "可回退物理图的选择性传播",
+          "mechanism": "沿用MVST-DSSL的图融合，将低置信边的动态消息路由减弱或回退至固定物理邻接；不新增复杂编码器，仅替换原有融合权重。",
+          "contribution": "实现对错误传播链的局部阻断，并检验正常邻居节点能否避免被缺测噪声污染。"
+        },
+        {
+          "title": "故障注入下的传播损害对照与稳定性约束",
+          "mechanism": "在控制连续缺测率/相同观测序列条件下，设计单节点故障注入、图边置换和交叉视角分歧消融；以被污染邻居的误差变化和边稳定性正则检验机制。",
+          "contribution": "不只看整体MAE，而是证明哪些路径被阻断、传播性错误是否减少，这是可反驳的模型行为证据。"
+        }
+      ],
+      "data": [
+        {
+          "name": "PEMS04 + PEMS08",
+          "url": "https://github.com/guoshnBJTU/ASTGNN",
+          "note": "两个标准公开基准已足够完成初始验证，统一相同训练切分、输入长度和缺测生成协议。"
+        },
+        {
+          "name": "METR-LA（可选外部复现）",
+          "url": "https://github.com/liyaguang/DCRNN",
+          "note": "只用于模型确定后的独立验证，不在本文中展开跨城市零样本迁移主线。"
+        }
+      ],
+      "validation": "主实验两数据集：连续缺测窗口10%/30%/50%与相邻节点聚集故障；比较MVST-DSSL原模型、节点掩码图融合、缺测专用模型及结构可靠性基线；消融边分歧/物理图回退/传播损害约束；报告12步MAE/RMSE、完整邻居节点的错误扩散系数、图稳定性、参数和延迟。",
+      "overlap": "与2026年的可用性条件图融合、双图缺测预测和不确定度门控高度接近，优先级应低于首报事件可信增益题；“边级冲突/传播污染”的可证伪证据是唯一值得突出的方法差异。",
+      "feasibility": "改动范围小，实验可控，但新颖性重叠风险较高。适合在文献全文排查后决定是否投稿。",
       "match_terms": [
         "dynamic graph",
         "self-supervised",
@@ -255,7 +301,23 @@
         "dynamic spatiotemporal graph robustness uncertainty",
         "lag aware directed traffic graph missing data",
         "cross-city traffic forecasting graph generalization"
-      ]
+      ],
+      "paper_title_en": "Trust the Edge, Not the Graph: Disagreement-Aware Selective Propagation under Block-Missing Traffic Observations",
+      "paper_type": "独立方法论文",
+      "paper_scope": "只研究连续30–60分钟的传感器块缺测下的12步交通预测；固定一套已有多视角编码器，主实验不同时攻克跨城市zero-shot、事件文本和全量噪声扰动。",
+      "hypothesis": "与仅使用节点有效性掩码或静态图补偿相比，针对‘缺测诱发的跨视角边冲突’做可校准的选择性传播，可能更有效地保护相邻正常节点。",
+      "key_experiment": "故障只注入一个节点或邻域，衡量与故障节点不同距离的正常观测节点MAE增量。若相对仅用mask的简单基线没有额外抑制扩散的证据，应判定创新不足。",
+      "stop_condition": "必须逐项比对2026年观测可用性动态图融合和不确定度传播近邻工作；若机制实质等价于已有可靠性门控，停止包装此题。",
+      "scope_size": "1种核心缺测模式 · 2个数据集 · 3个机制消融 · 1项定向故障实验",
+      "venue_fit": "有条件考虑 IEEE Transactions on Intelligent Transportation Systems、Transportation Research Part C；如果只能提升整体MAE而无结构传播机制证明，不宜宣称具有顶刊级区别。",
+      "decision": "去重后再决定",
+      "required_checks": [
+        "边级分歧是否超越简单缺测mask？",
+        "正常邻居误差污染能否复现？",
+        "已发表可靠图融合方法是否已提供相同机制？"
+      ],
+      "core_claim": "在连续缺测条件下，通过跨视角边分歧定位并抑制错误信息传播，而不是简单增强缺失值插补。",
+      "paper_ready": true
     }
   ],
   "update_policy": {
@@ -266,5 +328,8 @@
     "mode": "每周只自动补充关联文献候选，核心问题及创新机制由人工/AI核验后按需迭代，不自动推翻",
     "disclaimer": "候选文献为关键词匹配，并不表示论文已经解决该科学问题；需要全文人工核实。",
     "scheduled_first_check": "2026-11-21"
-  }
+  },
+  "intent": "single_top_journal_paper_candidates",
+  "scope": "每个候选方向仅对应一篇可独立投稿的研究论文，不是博士学位论文研究章节集合；每题1个可证伪科学问题、2–3项互相支撑的方法/协议创新、1–2个主数据集和一组关键消融。",
+  "journal_note": "Transportation Research Part C 或 IEEE T-ITS 仅作为交通预测研究契合度参考，不表示中科院分区/CCF等级、录用概率或编辑偏好已核验。"
 }
