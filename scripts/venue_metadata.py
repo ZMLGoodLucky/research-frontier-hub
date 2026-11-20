@@ -58,7 +58,13 @@ def annotate(item: dict, registry: dict | None = None) -> dict:
         zone = hit.get("cas_zone") if hit else None
         item["cas_zone"] = f"{zone}区" if zone in (1,2,3,4) else "2025版待核验"
         item["cas_edition"] = "2025历史版"
-        item["cas_source"] = registry["edition"]["cas_notice"]
+        item["cas_source"] = hit.get("cas_source") if hit and zone in (1,2,3,4) else registry["edition"]["cas_notice"]
+        item["cas_top"] = bool(hit.get("cas_top")) if hit and zone in (1,2,3,4) else None
+        item["cas_verification"] = hit.get("cas_verification","") if hit else ""
+        item["impact_factor"] = hit.get("impact_factor") if hit else None
+        item["impact_factor_year"] = hit.get("impact_factor_year") if hit else None
+        item["impact_factor_source"] = hit.get("impact_factor_source","") if hit else ""
+        item["letpub_url"] = hit.get("letpub_url","") if hit else ""
     elif kind == "conference":
         item["cas_zone"] = "不适用"
         item["cas_edition"] = None

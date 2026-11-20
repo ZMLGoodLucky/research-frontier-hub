@@ -102,13 +102,19 @@
       "ccf_grade": "C",
       "ccf_listed": true,
       "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/",
-      "cas_zone": "2025版待核验",
+      "cas_zone": "1区",
       "cas_edition": "2025历史版",
-      "cas_source": "https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html",
+      "cas_source": "https://www.letpub.com.cn/index.php?journalid=2799&page=journalapp&view=detail",
       "ccf_edition": "2026-03-31 第七版",
       "discovered_via": [
         "Elsevier · Expert Systems with Applications"
-      ]
+      ],
+      "cas_top": true,
+      "cas_verification": "LetPub及公开学术期刊资料参考；2025历史分区",
+      "impact_factor": 9.4,
+      "impact_factor_year": 2025,
+      "impact_factor_source": "https://shop.elsevier.com/subjects/journals/physical-sciences-and-engineering/computer-science/artificial-intelligence",
+      "letpub_url": "https://www.letpub.com.cn/index.php?journalid=2799&page=journalapp&view=detail"
     },
     {
       "id": "srep-2026-dsgn-tmt",

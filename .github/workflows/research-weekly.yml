@@ -39,6 +39,7 @@ jobs:
           python -m unittest discover -s tests -v
           node --check site/app.js
           node --check site/ideas.js
+          node --check site/navigation.js
           node --check site/settings.js
       - name: Collect papers and official RSS feeds
         if: github.event_name != 'push'

@@ -50,7 +50,7 @@
       <span class="publication-kind">${publicationName(kind)}</span>
       <span class="publication-short">${escape(short)}</span>
       <span class="publication-full" title="${escape(full)}">${escape(full)}</span>
-      <span class="publication-ranks"><span class="rank-pill">CCF ${escape(ccf)}</span><span class="rank-pill">中科院 ${escape(cas)}</span></span>
+      <span class="publication-ranks"><span class="rank-pill">CCF ${escape(ccf)}</span><span class="rank-pill">中科院 ${escape(cas)}${a.cas_top===true?' TOP':''}</span>${a.impact_factor?'<span class="rank-pill">IF '+escape(a.impact_factor)+' ('+escape(a.impact_factor_year||'年份待核验')+')</span>':''}</span>
     </div>`;
   }
   function renderDaily() {
@@ -107,7 +107,7 @@
     const topics = [typeName(a),a.category,a.status].filter(Boolean).map(t => `<span class="tag tag-secondary">${escape(t)}</span>`).join('');
     $('modalContent').innerHTML = `<h2 class="modal-title" id="detailTitle">${escape(a.title_zh || a.title)}</h2><div class="modal-en">${escape(a.title)}</div><div class="modal-meta">${topics}<span class="tag tag-gray">${pretty(a.date)}</span></div>
       ${publicationLine(a)}
-      <section class="modal-section"><h4>00 · 刊会评级与核验依据</h4><p>发表类型：${publicationName(a.publication_type)}<br>简称：${escape(a.venue_abbr||'待核验')}<br>全称：${escape(a.venue_full||a.venue||'待核验')}<br>CCF 收录：${a.ccf_listed===true?'是':a.ccf_grade==='不适用'?'不适用':'尚未核实'} · ${escape(a.ccf_grade||'待核验')} ${escape(a.ccf_edition||'')}<br>中科院分区：${escape(a.cas_zone||'待核验')} ${escape(a.cas_edition||'')}<br>${a.ccf_source&&url(a.ccf_source)?`<a href="${escape(url(a.ccf_source))}" target="_blank" rel="noopener noreferrer">CCF目录核验 ↗</a>`:'CCF目录待核验'}${a.cas_source&&url(a.cas_source)?` · <a href="${escape(url(a.cas_source))}" target="_blank" rel="noopener noreferrer">中科院停更公告 ↗</a>`:''}<br>交叉发现源：${escape((a.discovered_via||[a.source]).join(' / '))}</p></section>
+      <section class="modal-section"><h4>00 · 刊会评级与核验依据</h4><p>发表类型：${publicationName(a.publication_type)}<br>简称：${escape(a.venue_abbr||'待核验')}<br>全称：${escape(a.venue_full||a.venue||'待核验')}<br>CCF 收录：${a.ccf_listed===true?'是':a.ccf_grade==='不适用'?'不适用':'尚未核实'} · ${escape(a.ccf_grade||'待核验')} ${escape(a.ccf_edition||'')}<br>中科院分区：${escape(a.cas_zone||'待核验')} ${escape(a.cas_edition||'')}${a.cas_top===true?' · TOP':''}<br>影响因子：${a.impact_factor?escape(a.impact_factor)+'（'+escape(a.impact_factor_year||'年份待核验')+'年度 JIF）':'待核验'}<br>${a.ccf_source&&url(a.ccf_source)?`<a href="${escape(url(a.ccf_source))}" target="_blank" rel="noopener noreferrer">CCF目录核验 ↗</a>`:'CCF目录待核验'}${a.cas_source&&url(a.cas_source)?` · <a href="${escape(url(a.cas_source))}" target="_blank" rel="noopener noreferrer">${a.cas_zone&&/^\d区/.test(a.cas_zone)?'2025分区参考来源':'中科院停更说明'} ↗</a>`:''}${a.impact_factor_source&&url(a.impact_factor_source)?` · <a href="${escape(url(a.impact_factor_source))}" target="_blank" rel="noopener noreferrer">影响因子（出版社）↗</a>`:''}${a.letpub_url&&url(a.letpub_url)?` · <a href="${escape(url(a.letpub_url))}" target="_blank" rel="noopener noreferrer">LetPub 期刊详情↗</a>`:''}<br>交叉发现源：${escape((a.discovered_via||[a.source]).join(' / '))}</p></section>
       <section class="modal-section"><h4>01 · 研究问题 / Existing gap</h4><p>${escape(a.problem || '研究问题待全文阅读与核验。')}</p></section>
       <section class="modal-section"><h4>02 · 核心方法 / Method</h4><p>${escape(a.method || '自动候选：仅记录原始元数据，请查看原文核验核心方法。')}</p></section>
       <section class="modal-section"><h4>03 · 贡献与证据 / Contribution</h4><p>${escape(a.contribution || '待人工审阅，数据库自动收录不代表已验证创新性。')}</p></section>

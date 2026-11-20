@@ -21,7 +21,11 @@ class VenueMetadataTest(unittest.TestCase):
             self.assertEqual(a["venue_abbr"],abbr)
             self.assertTrue(a["ccf_listed"])
             self.assertEqual(a["ccf_grade"],"C")
-            self.assertEqual(a["cas_zone"],"2025版待核验")
+            self.assertEqual(a["cas_zone"],"1区" if abbr=="ESWA" else "2025版待核验")
+            if abbr=="ESWA":
+                self.assertTrue(a["cas_top"])
+                self.assertEqual(a["impact_factor"],9.4)
+                self.assertEqual(a["impact_factor_year"],2025)
     def test_arxiv_not_assigned_conference_grade(self):
         a=annotate({"type":"paper","venue":"arXiv","source":"arXiv","publication_type":"preprint","status":"作者声称NeurIPS接收"})
         self.assertEqual(a["ccf_grade"],"不适用")

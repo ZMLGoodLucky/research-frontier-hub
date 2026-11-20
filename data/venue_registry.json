@@ -17,8 +17,16 @@
       "ccf": "C",
       "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/",
       "ccf_category": "人工智能",
-      "cas_zone": null,
-      "cas_year": 2025
+      "cas_zone": 1,
+      "cas_year": 2025,
+      "cas_top": true,
+      "cas_source": "https://www.letpub.com.cn/index.php?journalid=2799&page=journalapp&view=detail",
+      "cas_verification": "LetPub及其他学术期刊资料核对的2025历史分区；非2026新版官方发布",
+      "impact_factor": 9.4,
+      "impact_factor_year": 2025,
+      "impact_factor_source": "https://shop.elsevier.com/subjects/journals/physical-sciences-and-engineering/computer-science/artificial-intelligence",
+      "letpub_url": "https://www.letpub.com.cn/index.php?journalid=2799&page=journalapp&view=detail",
+      "issn": "0957-4174"
     },
     {
       "name": "Engineering Applications of Artificial Intelligence",
