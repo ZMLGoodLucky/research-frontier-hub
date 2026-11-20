@@ -1,0 +1,44 @@
+name: Weekly Research Ideas Evidence Refresh
+
+on:
+  schedule:
+    # Every Saturday 10:00 Asia/Shanghai = Saturday 02:00 UTC.
+    # GitHub cron execution can be delayed.
+    - cron: '0 2 * * 6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: frontierlab-ideas-weekly
+  cancel-in-progress: false
+
+jobs:
+  check-new-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate and refresh weekly evidence
+        run: |
+          python -m unittest discover -s tests -v
+          python scripts/refresh_research_ideas.py
+      - name: Commit evidence update (not curated science claims)
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add site/idea-evidence.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: weekly novelty evidence check'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          else
+            echo "Weekly evidence unchanged; skip commit."
+          fi

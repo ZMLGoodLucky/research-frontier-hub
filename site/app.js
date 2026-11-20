@@ -140,8 +140,7 @@
     $('ccfGradeFilter').addEventListener('change',(e)=>{state.ccf=e.target.value;render();});
     $('cardList').addEventListener('click',(e)=>{const save=e.target.closest('[data-save]'),details=e.target.closest('[data-detail]');if(save){const id=save.dataset.save;if(state.saved.has(id)){state.saved.delete(id);toast('已取消收藏');}else{state.saved.add(id);toast('已收藏到本地浏览器');}saveState();render();}if(details){detail(details.dataset.detail);}});
     $('mobileMenu').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
-    $('heroExplore').addEventListener('click',()=>{$('feedSection').scrollIntoView({behavior:'smooth'});state.sort='curated';$('sortFilter').value='curated';render();});
-    ['heroMethod','footerMethod'].forEach(x=>$(x).addEventListener('click',method));
+    $('footerMethod').addEventListener('click',method);
     $('exportSaved').addEventListener('click',exportSaved);
     $('closeModal').addEventListener('click',closeModal);
     $('modalBackdrop').addEventListener('click',(e)=>{if(e.target === $('modalBackdrop'))closeModal();});
@@ -150,8 +149,6 @@
   async function load(){
     const now = new Date();const shanghai = new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'long',day:'numeric',weekday:'long'}).format(now);
     $('todayLabel').textContent = shanghai;
-    const iso = today();const d = new Date(iso+'T00:00:00Z');
-    $('heroWeek').textContent = `${iso.slice(0,4)}.${iso.slice(5,7)}.${iso.slice(8,10)}`;
     try {
       let data;try { const r=await fetch('data.json',{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status); data=await r.json(); } catch(err) { if(!window.FRONTIER_INITIAL_DATA)throw err;data=window.FRONTIER_INITIAL_DATA; }
       if(!Array.isArray(data.items))throw Error('数据格式无效');

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "checked_at": null,
+  "timezone": "Asia/Shanghai",
+  "lookback_days": 14,
+  "status": "首次每周检索计划于2026-11-21执行；目前尚无自动匹配结果",
+  "review_method": "基于公开元数据标题/主题自动匹配，非论文全文核验",
+  "topics": {},
+  "seen": {}
+}

@@ -84,3 +84,67 @@
 .daily-pick a:hover{text-decoration:underline}
 .daily-empty{grid-column:1/-1;color:#8191a4;background:#f9fbff;border:1px dashed #d8e2f2;border-radius:10px;padding:16px;font-size:calc(12px * var(--font-scale));line-height:1.8}
 @media(max-width:720px){.daily-brief{padding:18px 14px;margin:18px 0 24px}.daily-brief-head{align-items:flex-start;flex-direction:column}.daily-pick-grid{grid-template-columns:1fr}.daily-rule{display:none}.publication-line{padding:9px}.publication-ranks{margin-left:0;flex-basis:100%}}
+
+/* FrontierLab v1.3 — restrained research problem & novelty workspace */
+.innovation-lab{margin:24px 0 28px;scroll-margin-top:28px}
+.innovation-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:12px}
+.innovation-head h2{font-size:calc(22px * var(--font-scale));color:#1d314e;margin:7px 0 7px;line-height:1.35;letter-spacing:-.25px}
+.innovation-head p{font-size:calc(11px * var(--font-scale));color:#77899e;margin:0;line-height:1.7}
+.innovation-head-marker{display:inline-block;vertical-align:middle;font-size:calc(10px * var(--font-scale));margin-left:8px;background:#eaf1ff;color:#4873be;padding:4px 7px;border-radius:6px;letter-spacing:0}
+.innovation-cadence{display:flex;align-items:center;gap:10px;flex-shrink:0;padding:9px 12px;border-radius:10px;background:#fff;border:1px solid #e3eaf4}
+.innovation-cadence-dot{width:8px;height:8px;border-radius:50%;background:#26b39a;box-shadow:0 0 0 4px #28b9a51a}
+.innovation-cadence strong,.innovation-cadence small{display:block}
+.innovation-cadence strong{font-size:calc(10px * var(--font-scale));color:#355074;font-weight:750}
+.innovation-cadence small{font-size:calc(9px * var(--font-scale));color:#99a6b6;margin-top:4px}
+.innovation-notice{font-size:calc(10px * var(--font-scale));color:#7a8da4;border-left:3px solid #8ba9e5;padding:8px 12px;background:#edf3fc80;border-radius:0 7px 7px 0;line-height:1.7;margin:12px 0 16px}
+.innovation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.innovation-card{min-width:0;background:#fff;border:1px solid #e2e9f2;border-radius:13px;padding:17px 17px 14px;box-shadow:0 4px 18px #243d5e0b}
+.innovation-card-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.innovation-number{font-size:calc(14px * var(--font-scale));font-weight:850;color:#4673c7;padding-right:3px}
+.innovation-track{font-size:calc(10px * var(--font-scale));font-weight:740;color:#347287;background:#ebf7f7;padding:4px 7px;border-radius:6px}
+.innovation-priority{font-size:calc(9px * var(--font-scale));color:#8497b0;margin-left:auto}
+.innovation-card h3{color:#1d3656;font-size:calc(14px * var(--font-scale));line-height:1.55;margin:13px 0 8px}
+.innovation-question{color:#566c85;line-height:1.8;font-size:calc(11px * var(--font-scale));margin:0;min-height:82px}
+.innovation-summary{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.innovation-summary span{color:#647d9c;border:1px solid #e4eafa;border-radius:6px;background:#f7faff;padding:4px 6px;font-size:calc(9px * var(--font-scale))}
+.innovation-thesis{border-top:1px solid #edf1f6;padding-top:11px}
+.innovation-thesis strong{display:block;color:#3c63ad;font-size:calc(10px * var(--font-scale));margin-bottom:5px}
+.innovation-thesis p{margin:0;font-size:calc(10px * var(--font-scale));line-height:1.75;color:#728399}
+.innovation-short-novelties{display:flex;flex-direction:column;gap:7px;margin:13px 0 4px}
+.innovation-short-novelties>div{display:flex;align-items:baseline;gap:9px;color:#415875;font-size:calc(10px * var(--font-scale));line-height:1.5}
+.innovation-short-novelties>div span{flex:0 0 17px;height:17px;display:grid;place-items:center;border-radius:5px;background:#ecf2ff;color:#416bca;font-size:calc(9px * var(--font-scale));font-weight:800}
+.innovation-details{border-top:1px solid #eef2f8;margin-top:16px}
+.innovation-details>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0 2px;color:#3265c0;cursor:pointer;font-weight:750;font-size:calc(10px * var(--font-scale))}
+.innovation-details>summary::-webkit-details-marker{display:none}
+.innovation-details>summary:focus-visible{outline:2px solid #a2baf2;outline-offset:3px;border-radius:3px}
+.innovation-chevron{font-size:calc(18px * var(--font-scale));transition:transform .18s}
+.innovation-details[open] .innovation-chevron{transform:rotate(180deg)}
+.innovation-expanded{padding-top:8px}
+.innovation-expanded>section{padding:14px 0;border-top:1px solid #edf1f6}
+.innovation-expanded h4{font-size:calc(11px * var(--font-scale));margin:0 0 9px;color:#284f92;line-height:1.5}
+.innovation-expanded section p{font-size:calc(10px * var(--font-scale));line-height:1.85;color:#677a94;margin:8px 0 0}
+.idea-reference{padding:10px 0;border-bottom:1px solid #f0f3f8}
+.idea-reference:last-child{border-bottom:0}
+.idea-reference-title{line-height:1.55;font-size:calc(10px * var(--font-scale))}
+.idea-reference-title a,.idea-resource a,.idea-evidence a{color:#305eaf;text-decoration:underline;text-decoration-color:#bfd1f0;text-underline-offset:3px}
+.idea-reference-title a:hover,.idea-resource a:hover,.idea-evidence a:hover{color:#1a448e}
+.idea-reference-number{font-weight:800;color:#6f8fbf;padding-right:6px}
+.idea-reference-year{color:#99a6b7;font-size:calc(9px * var(--font-scale))}
+.idea-novelty{display:flex;gap:11px;margin:14px 0;padding:12px;border-radius:10px;background:#f7faff;border:1px solid #e7edfa}
+.idea-novelty-index{flex-shrink:0;color:#4c77c0;font-size:calc(9px * var(--font-scale));font-weight:800;margin-top:3px}
+.idea-novelty strong{font-size:calc(11px * var(--font-scale));line-height:1.6;color:#263c59}
+.idea-resource{margin:8px 0;font-size:calc(10px * var(--font-scale))}
+.idea-resource strong{font-weight:750}
+.idea-evidence{background:#f8fbff;border:1px solid #e0eaf6;border-radius:10px;margin:10px 0;padding:12px}
+.idea-evidence-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:calc(10px * var(--font-scale));color:#486c9f}
+.idea-evidence-heading>span{color:#8b9db1;font-size:calc(9px * var(--font-scale))}
+.idea-evidence ol{padding-left:16px}
+.idea-evidence li{padding:4px 0;line-height:1.6;font-size:calc(10px * var(--font-scale))}
+.idea-evidence-meta{display:block;color:#8799ad;font-size:calc(9px * var(--font-scale));margin-top:2px}
+.idea-evidence p{color:#74869b;line-height:1.7;font-size:calc(9px * var(--font-scale))}
+.innovation-footnote{margin-top:10px;font-size:calc(9px * var(--font-scale));color:#96a3b3}
+.innovation-loading{grid-column:1/-1;padding:16px;border:1px dashed #dbe5f3;background:white;color:#8191a7;border-radius:10px;font-size:calc(11px * var(--font-scale))}
+@media(max-width:1320px){.innovation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.innovation-question{min-height:0}}
+@media(max-width:1030px){.innovation-grid{grid-template-columns:1fr}.innovation-cadence{display:none}}
+@media(max-width:720px){.innovation-head{display:block}.innovation-head h2{font-size:calc(19px * var(--font-scale))}.innovation-head-marker{font-size:calc(9px * var(--font-scale))}.innovation-card{padding:16px}.innovation-lab{margin:20px 0}.innovation-summary span{padding:4px}.innovation-question{min-height:0}}
+@media(prefers-reduced-motion:reduce){.innovation-chevron{transition:none}}

@@ -92,3 +92,11 @@ python -m unittest discover -s tests -v
 - 每日速览为**自动算法初筛候选**而非AI阅读全文评审结论；过去14日已展示的记录会优先排除。当日不足3篇时保持真实数量。
 - 如果用户希望配置 API key，使用 GitHub 仓库的 Actions Secrets：`OPENALEX_API_KEY`、`S2_API_KEY`、`CROSSREF_MAILTO`。任何密钥都不得放入公开仓库。
 - 官方参考：CCF 2026 https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml ；中国科学院文献情报中心停更声明 https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html ；TRB RSS停用 https://www.trb.org/Main/RssFeeds.aspx
+
+## 7. V1.3 科研问题与创新选题（每周更新）
+
+- 删除首页原有蓝色宣传横幅，保留论文雷达、研究数据统计、收藏、显示设置和每日论文精选。增加导航 **科研创新选题**，页面有三个可展开的研究方向，分别与事件到达/范围、首报信息可信度及多视角动态图结构可靠性有关。
+- 每个选题呈现 **科学问题→前人已解决什么→尚未解决的缺口→3个可验证创新点→数据与实验→重叠风险**，保留原论文链接。内容属于候选研究假设，不能宣称“无人研究”或证明全部创新点首次提出。
+- **每周六北京时间 10:00** 运行 `.github/workflows/ideas-weekly.yml`，只从最近14天已经收录的真实论文元数据中筛选“关联证据候选”，更新 `site/idea-evidence.json`。不能擅自用关键词匹配结果认定别人已经解决问题，也不能自动更改 `site/research-ideas.json` 中经过整理的科学问题、2–3项核心机制。
+- 若有新的、可核验证据证明重叠或提供更优研究切入，应经过人工/AI全文审读后小范围维护 `site/research-ideas.json`，并更新 reviewed_on；没有新证据则维持原有研究论证。
+- 周更基于**每日采集的学术元数据**；遇到数据库限流或无文献时会明确显示本次无新匹配，不捏造论文。周更代码 `scripts/refresh_research_ideas.py`，本地可通过 `python scripts/refresh_research_ideas.py` 执行。
