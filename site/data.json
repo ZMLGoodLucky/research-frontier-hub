@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-19T09:06:36+00:00",
-  "last_checked_at": "2026-11-19T09:06:36+00:00",
+  "generated_at": "2026-11-21T07:48:24+00:00",
+  "last_checked_at": "2026-11-21T07:48:24+00:00",
   "timezone": "Asia/Shanghai",
   "sources_note": "自动发现未进行同行评审；期刊与会议分区须人工核实。",
   "fetch_status": [
     {
       "source": "OpenAlex",
-      "ok": false,
-      "error": "HTTP Error 429: Too Many Requests"
+      "ok": true,
+      "collected": 1
     },
     {
       "source": "arXiv",
@@ -16,12 +16,185 @@
       "collected": 2
     },
     {
-      "source": "MIT News RSS",
+      "source": "Crossref",
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "source": "Semantic Scholar",
+      "ok": false,
+      "error": "HTTP Error 429: "
+    },
+    {
+      "source": "MIT News · AI",
+      "ok": true,
+      "collected": 0
+    },
+    {
+      "source": "IEEE Spectrum",
+      "ok": true,
+      "collected": 1
+    },
+    {
+      "source": "Communications of the ACM · News",
+      "ok": false,
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "source": "Springer Nature · Nature",
+      "ok": true,
+      "collected": 0
+    },
+    {
+      "source": "Elsevier · ESWA",
+      "ok": true,
+      "collected": 0
+    },
+    {
+      "source": "Elsevier · EAAI",
+      "ok": true,
+      "collected": 0
+    },
+    {
+      "source": "MIT News · Research",
       "ok": true,
       "collected": 0
     }
   ],
   "items": [
+    {
+      "id": "openalex-f220f8b1e63d5c",
+      "type": "paper",
+      "publication_type": "journal",
+      "discovered_via": [
+        "OpenAlex"
+      ],
+      "category": "动态图与依赖",
+      "topics": [
+        "交通预测",
+        "动态图"
+      ],
+      "title": "Time-Aware Spatio-Temporal Graph Neural Networks for Traffic Forecasting",
+      "title_zh": "",
+      "date": "2026-11-20",
+      "source": "OpenAlex",
+      "venue": "SAE technical papers on CD-ROM/SAE technical paper series",
+      "status": "数据库记录：conference-paper · 尚待核验",
+      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
+      "verified": false,
+      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
+      "method": "原始英文摘要摘录（未经人工核验）：Accurately modeling intricate geographical interconnections and dynamic temporal patterns is still a significant difficulty in traffic forecasting, playing a crucial role in intelligent transportation systems. The majority of contemporary spatiotemporal graph neural networks are limited in their capacity to capture long-range temporal dependencies and time-varying spatial correlations because they rely on pre-defined or self-learning graph topologies in conjunction with recurrent-based temporal modeling. This study suggests a Time-Aware Spatio-Temporal Graph Neural Network (TASTGNN) for traffic forecasting in order to overcome these drawbacks. In order to enable the learned graph structures to dynamically adjust to changing traffic correlations over time, we first provide a time-aware grap",
+      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
+      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
+      "questions": [
+        "论文是否公开实验数据与源码？",
+        "是否使用与既有工作一致的评价协议？"
+      ],
+      "url": "https://doi.org/10.4271/2026-99-2415",
+      "doi": "10.4271/2026-99-2415",
+      "code": "",
+      "featured": false,
+      "editorial": false,
+      "venue_abbr": "待核验",
+      "venue_full": "SAE technical papers on CD-ROM/SAE technical paper series",
+      "ccf_grade": "待核验",
+      "ccf_listed": null,
+      "ccf_edition": "2026-03-31 第七版",
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
+      "cas_zone": "2025版待核验",
+      "cas_edition": "2025历史版",
+      "cas_source": "https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html",
+      "cas_top": null,
+      "cas_verification": "",
+      "impact_factor": null,
+      "impact_factor_year": null,
+      "impact_factor_source": "",
+      "letpub_url": ""
+    },
+    {
+      "id": "arxiv-82106f5b8c0e75",
+      "type": "paper",
+      "publication_type": "preprint",
+      "discovered_via": [
+        "arXiv"
+      ],
+      "category": "时空预测",
+      "topics": [
+        "交通预测"
+      ],
+      "title": "From Data Alignment to Parameter Generation: Few-Shot Cross-City Traffic Prediction with Conditional Diffusion",
+      "title_zh": "",
+      "date": "2026-11-19",
+      "source": "arXiv",
+      "venue": "arXiv 预印本",
+      "status": "预印本 · 非录用证明",
+      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
+      "verified": false,
+      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
+      "method": "原始英文摘要摘录（未经人工核验）：Accurate mobile traffic forecasting is crucial for network service management, supporting proactive capacity provisioning, congestion mitigation, and energy-efficient operation. However, many cities and regions are data-scarce (e.g., newly deployed or poorly instrumented areas), thus making traffic prediction a few-shot learning problem and limiting the practicality of standard data-driven models. Existing cross-city solutions primarily rely on data-space alignment to match traffic distributions between data-rich and data-scarce cities, but such alignment is often brittle under real-world distribution shifts, measurement noise, and city-specific bias. To address these limitations, we propose a Conditional Diffusion-based Parameter Generation (CDPG) framework. Instead of aligning raw data, ",
+      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
+      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
+      "questions": [
+        "论文是否公开实验数据与源码？",
+        "是否使用与既有工作一致的评价协议？"
+      ],
+      "url": "http://arxiv.org/abs/2611.25592v1",
+      "doi": "",
+      "code": "",
+      "featured": false,
+      "editorial": false,
+      "venue_abbr": "arXiv",
+      "venue_full": "arXiv 预印本平台",
+      "ccf_grade": "不适用",
+      "ccf_listed": null,
+      "ccf_edition": null,
+      "ccf_source": "",
+      "cas_zone": "不适用",
+      "cas_edition": null,
+      "cas_source": ""
+    },
+    {
+      "id": "ieee-spectrum-ab7506628686a4",
+      "type": "insight",
+      "publication_type": "news",
+      "discovered_via": [
+        "IEEE Spectrum"
+      ],
+      "category": "权威资讯",
+      "topics": [
+        "交通预测"
+      ],
+      "title": "Understand How Satellite Links Shape IoT Device Design and Testing",
+      "title_zh": "",
+      "date": "2026-11-17",
+      "source": "IEEE Spectrum",
+      "venue": "IEEE Spectrum",
+      "status": "机构资讯 · 非论文",
+      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
+      "verified": false,
+      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
+      "method": "原始英文摘要摘录（未经人工核验）：How 3GPP Releases 15, 16, and 17 brought satellite access into 5G NR, NB-IoT, and eMTC. Why satellite links suit IoT devices that send small, infrequent, and delay-tolerant messages. Where non-terrestrial networks (NTN) add value, including asset tracking, agriculture, public safety, and offshore operations. How power efficiency, RF signaling, and antenna design shape satellite-connected device development. Why long propagation delay, Doppler shift, and intermittent coverage make static test methods insufficient. Which measurements show deployment readiness, such as transmit power, modulation accuracy, spectral emissions, receiver sensitivity, and block error rate (BLER). How emulated satellite conditions help verify synchronization, signaling, HARQ behavior, mobility, and interoperability",
+      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
+      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
+      "questions": [
+        "论文是否公开实验数据与源码？",
+        "是否使用与既有工作一致的评价协议？"
+      ],
+      "url": "https://content.knowledgehub.wiley.com/5g-nr-ntn-design-and-test-challenges-for-satellite-connected-iot/",
+      "doi": "",
+      "code": "",
+      "featured": false,
+      "editorial": false,
+      "venue_abbr": "机构资讯",
+      "venue_full": "IEEE Spectrum",
+      "ccf_grade": "不适用",
+      "ccf_listed": null,
+      "ccf_edition": null,
+      "ccf_source": "",
+      "cas_zone": "不适用",
+      "cas_edition": null,
+      "cas_source": ""
+    },
     {
       "id": "eai-2026-dynamic-dependency",
       "type": "paper",
@@ -57,14 +230,17 @@
       "venue_full": "Engineering Applications of Artificial Intelligence",
       "ccf_grade": "C",
       "ccf_listed": true,
+      "ccf_edition": "2026-03-31 第七版",
       "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/zgjsjxhtjgjxskw/cl/2017-04-25/592015.shtml",
       "cas_zone": "2025版待核验",
       "cas_edition": "2025历史版",
       "cas_source": "https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html",
-      "ccf_edition": "2026-03-31 第七版",
-      "discovered_via": [
-        "Elsevier · Engineering Applications of Artificial Intelligence"
-      ]
+      "cas_top": null,
+      "cas_verification": "",
+      "impact_factor": null,
+      "impact_factor_year": null,
+      "impact_factor_source": "",
+      "letpub_url": ""
     },
     {
       "id": "eswa-2026-cm-mscgcn",
@@ -101,16 +277,13 @@
       "venue_full": "Expert Systems with Applications",
       "ccf_grade": "C",
       "ccf_listed": true,
+      "ccf_edition": "2026-03-31 第七版",
       "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/AI/",
       "cas_zone": "1区",
       "cas_edition": "2025历史版",
       "cas_source": "https://www.letpub.com.cn/index.php?journalid=2799&page=journalapp&view=detail",
-      "ccf_edition": "2026-03-31 第七版",
-      "discovered_via": [
-        "Elsevier · Expert Systems with Applications"
-      ],
       "cas_top": true,
-      "cas_verification": "LetPub及公开学术期刊资料参考；2025历史分区",
+      "cas_verification": "LetPub及其他学术期刊资料核对的2025历史分区；非2026新版官方发布",
       "impact_factor": 9.4,
       "impact_factor_year": 2025,
       "impact_factor_source": "https://shop.elsevier.com/subjects/journals/physical-sciences-and-engineering/computer-science/artificial-intelligence",
@@ -151,14 +324,17 @@
       "venue_full": "Scientific Reports",
       "ccf_grade": "待核验",
       "ccf_listed": null,
+      "ccf_edition": "2026-03-31 第七版",
       "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
       "cas_zone": "2025版待核验",
       "cas_edition": "2025历史版",
       "cas_source": "https://las.cas.cn/news/tzgg/202603/t20260327_8178738.html",
-      "ccf_edition": "2026-03-31 第七版",
-      "discovered_via": [
-        "Springer Nature · Scientific Reports"
-      ]
+      "cas_top": null,
+      "cas_verification": "",
+      "impact_factor": null,
+      "impact_factor_year": null,
+      "impact_factor_source": "",
+      "letpub_url": ""
     },
     {
       "id": "arxiv-2611-12635",
@@ -190,19 +366,20 @@
       "code": "",
       "featured": false,
       "editorial": true,
+      "discovered_via": [
+        "arXiv:2611.12635",
+        "arXiv"
+      ],
       "publication_type": "preprint",
       "venue_abbr": "arXiv",
       "venue_full": "arXiv 预印本平台",
       "ccf_grade": "不适用",
       "ccf_listed": null,
+      "ccf_edition": null,
       "ccf_source": "",
       "cas_zone": "不适用",
       "cas_edition": null,
-      "cas_source": "",
-      "ccf_edition": null,
-      "discovered_via": [
-        "arXiv:2611.12635"
-      ]
+      "cas_source": ""
     },
     {
       "id": "arxiv-2611-09015",
@@ -239,14 +416,11 @@
       "venue_full": "arXiv 预印本平台",
       "ccf_grade": "不适用",
       "ccf_listed": null,
+      "ccf_edition": null,
       "ccf_source": "",
       "cas_zone": "不适用",
       "cas_edition": null,
-      "cas_source": "",
-      "ccf_edition": null,
-      "discovered_via": [
-        "arXiv:2611.09015"
-      ]
+      "cas_source": ""
     },
     {
       "id": "arxiv-2610-37598",
@@ -283,14 +457,11 @@
       "venue_full": "arXiv 预印本平台",
       "ccf_grade": "不适用",
       "ccf_listed": null,
+      "ccf_edition": null,
       "ccf_source": "",
       "cas_zone": "不适用",
       "cas_edition": null,
-      "cas_source": "",
-      "ccf_edition": null,
-      "discovered_via": [
-        "arXiv:2610.37598"
-      ]
+      "cas_source": ""
     },
     {
       "id": "mit-2026-cathy-wu",
@@ -326,27 +497,21 @@
       "venue_full": "MIT News（研究机构报道）",
       "ccf_grade": "不适用",
       "ccf_listed": null,
+      "ccf_edition": null,
       "ccf_source": "",
       "cas_zone": "不适用",
       "cas_edition": null,
-      "cas_source": "",
-      "ccf_edition": null,
-      "discovered_via": [
-        "MIT News"
-      ]
+      "cas_source": ""
     }
   ],
   "daily_digest": {
-    "date": "2026-11-20",
+    "date": "2026-11-21",
     "ids": [
-      "eai-2026-dynamic-dependency",
-      "eswa-2026-cm-mscgcn",
-      "srep-2026-dsgn-tmt",
-      "arxiv-2611-12635",
-      "arxiv-2611-09015"
+      "openalex-f220f8b1e63d5c",
+      "arxiv-82106f5b8c0e75"
     ],
-    "target": "每天优选3–5篇；不足不凑数",
-    "mode": "初始存量精选，非当天新发表；每日采集运行后将自动刷新"
+    "target": "每天优选3–5篇；不足则不凑数",
+    "mode": "算法初筛，未完成全文人工核验"
   },
   "venue_registry_edition": {
     "ccf": "2026-03-31 第七版",
