@@ -1,10 +1,45 @@
 {
   "schema_version": "1.0",
-  "checked_at": null,
+  "checked_at": "2026-11-21T17:09:24+08:00",
   "timezone": "Asia/Shanghai",
   "lookback_days": 14,
-  "status": "首次每周检索计划于2026-11-21执行；目前尚无自动匹配结果",
+  "source_data_generated_at": "2026-11-21T07:48:24+00:00",
   "review_method": "基于公开元数据标题/主题自动匹配，非论文全文核验",
-  "topics": {},
-  "seen": {}
+  "status": "自动证据更新不修改核心科学问题及三个创新假设",
+  "topics": {
+    "event-evidence": {
+      "papers": [],
+      "new_count": 0,
+      "summary": "新增匹配 0 篇；论文贡献及重叠性待全文核验"
+    },
+    "incident-arrival-boundary": {
+      "papers": [],
+      "new_count": 0,
+      "summary": "新增匹配 0 篇；论文贡献及重叠性待全文核验"
+    },
+    "graph-credibility": {
+      "papers": [
+        {
+          "title": "Time-Aware Spatio-Temporal Graph Neural Networks for Traffic Forecasting",
+          "date": "2026-11-20",
+          "venue": "SAE technical papers on CD-ROM/SAE technical paper series",
+          "url": "https://doi.org/10.4271/2026-99-2415",
+          "doi": "10.4271/2026-99-2415",
+          "discovered_via": [
+            "OpenAlex"
+          ],
+          "candidate_only": true
+        }
+      ],
+      "new_count": 1,
+      "summary": "新增匹配 1 篇；论文贡献及重叠性待全文核验"
+    }
+  },
+  "seen": {
+    "event-evidence": [],
+    "incident-arrival-boundary": [],
+    "graph-credibility": [
+      "https://doi.org/10.4271/2026-99-2415"
+    ]
+  }
 }
