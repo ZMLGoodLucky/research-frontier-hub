@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-21T07:48:24+00:00",
-  "last_checked_at": "2026-11-21T07:48:24+00:00",
+  "generated_at": "2026-11-22T07:34:31+00:00",
+  "last_checked_at": "2026-11-22T07:34:31+00:00",
   "timezone": "Asia/Shanghai",
   "sources_note": "自动发现未进行同行评审；期刊与会议分区须人工核实。",
   "fetch_status": [
     {
       "source": "OpenAlex",
       "ok": true,
-      "collected": 1
+      "collected": 0
     },
     {
       "source": "arXiv",
@@ -17,8 +17,8 @@
     },
     {
       "source": "Crossref",
-      "ok": false,
-      "error": "HTTP Error 429: Too Many Requests"
+      "ok": true,
+      "collected": 0
     },
     {
       "source": "Semantic Scholar",
@@ -505,11 +505,8 @@
     }
   ],
   "daily_digest": {
-    "date": "2026-11-21",
-    "ids": [
-      "openalex-f220f8b1e63d5c",
-      "arxiv-82106f5b8c0e75"
-    ],
+    "date": "2026-11-22",
+    "ids": [],
     "target": "每天优选3–5篇；不足则不凑数",
     "mode": "算法初筛，未完成全文人工核验"
   },
