@@ -1,24 +1,24 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-22T07:34:31+00:00",
-  "last_checked_at": "2026-11-22T07:34:31+00:00",
+  "generated_at": "2026-11-23T08:21:47+00:00",
+  "last_checked_at": "2026-11-23T08:21:47+00:00",
   "timezone": "Asia/Shanghai",
   "sources_note": "自动发现未进行同行评审；期刊与会议分区须人工核实。",
   "fetch_status": [
     {
       "source": "OpenAlex",
       "ok": true,
-      "collected": 0
+      "collected": 5
     },
     {
       "source": "arXiv",
       "ok": true,
-      "collected": 2
+      "collected": 3
     },
     {
       "source": "Crossref",
-      "ok": true,
-      "collected": 0
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
     },
     {
       "source": "Semantic Scholar",
@@ -62,6 +62,132 @@
     }
   ],
   "items": [
+    {
+      "id": "openalex-779256f5f55518",
+      "type": "paper",
+      "publication_type": "unknown",
+      "discovered_via": [
+        "OpenAlex"
+      ],
+      "category": "时空预测",
+      "topics": [
+        "交通预测"
+      ],
+      "title": "From Minutes to Days: A Scalable Deep Learning Framework for Operational and Strategic Traffic Flow Prediction",
+      "title_zh": "",
+      "date": "2026-11-22",
+      "source": "OpenAlex",
+      "venue": "Lecture notes in mobility",
+      "status": "数据库记录：conference-paper · 尚待核验",
+      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
+      "verified": false,
+      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
+      "method": "原始英文摘要摘录（未经人工核验）：Accurate traffic flow prediction is essential for both real-time traffic management and long-term mobility planning. This paper presents a unified framework combining short-term forecasts using Spatio-Temporal Graph Convolutional Networks (STGCNs) with multi-day demand classification to address both operational and strategic needs. In Thessaloniki, Greece, STGCNs were trained on traffic data at 1-, 5-, 15-, and 30-min resolutions, with 1- and 5-min models deployed in real time. Results demonstrate their effectiveness in capturing short-term dynamics and supporting live traffic management. In South Holland, the Netherlands, the framework was applied to a coastal network serving tourist areas. STGCNs trained on 15-min aggregated data generated 15-, 30-, and 45-min forecasts for congestion ma",
+      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
+      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
+      "questions": [
+        "论文是否公开实验数据与源码？",
+        "是否使用与既有工作一致的评价协议？"
+      ],
+      "url": "https://doi.org/10.1007/978-3-032-36098-4_145",
+      "doi": "10.1007/978-3-032-36098-4_145",
+      "code": "",
+      "featured": false,
+      "editorial": false,
+      "venue_abbr": "待核验",
+      "venue_full": "Lecture notes in mobility",
+      "ccf_grade": "待核验",
+      "ccf_listed": null,
+      "ccf_edition": "2026-03-31 第七版",
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
+      "cas_zone": "类型待核验",
+      "cas_edition": null,
+      "cas_source": ""
+    },
+    {
+      "id": "openalex-e1c9edf17768c6",
+      "type": "paper",
+      "publication_type": "unknown",
+      "discovered_via": [
+        "OpenAlex"
+      ],
+      "category": "时空预测",
+      "topics": [
+        "交通预测"
+      ],
+      "title": "Spatio-Temporal Graph Convolutional Networks in Real-Time Urban Systems: Multi-Horizon Learning, Deployment and Residual Correction for Short-Term Traffic Prediction",
+      "title_zh": "",
+      "date": "2026-11-22",
+      "source": "OpenAlex",
+      "venue": "Lecture notes in mobility",
+      "status": "数据库记录：conference-paper · 尚待核验",
+      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
+      "verified": false,
+      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
+      "method": "原始英文摘要摘录（未经人工核验）：Accurate short-term forecasting of traffic metrics is essential for proactive traffic management in dynamic urban environments. This study investigates the deployment of Spatio-Temporal Graph Convolutional Networks (STGCNs) for real-time traffic prediction, with a primary focus on the urban network of Thessaloniki, Greece. Using one-minute resolution data from 583 paths, we trained models at multiple temporal resolutions (1, 5, 15, and 30 min), each predicting the next aggregated step. The deployed one-minute model supports continuous imputation and immediate prediction, while the deployed five-minute model provides operational forecasts and serves as the basis for a residual correction module that learns from systematic errors to improve accuracy. To evaluate generalizability, the methodo",
+      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
+      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
+      "questions": [
+        "论文是否公开实验数据与源码？",
+        "是否使用与既有工作一致的评价协议？"
+      ],
+      "url": "https://doi.org/10.1007/978-3-032-36098-4_147",
+      "doi": "10.1007/978-3-032-36098-4_147",
+      "code": "",
+      "featured": false,
+      "editorial": false,
+      "venue_abbr": "待核验",
+      "venue_full": "Lecture notes in mobility",
+      "ccf_grade": "待核验",
+      "ccf_listed": null,
+      "ccf_edition": "2026-03-31 第七版",
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
+      "cas_zone": "类型待核验",
+      "cas_edition": null,
+      "cas_source": ""
+    },
+    {
+      "id": "openalex-d46b64a587d740",
+      "type": "paper",
+      "publication_type": "unknown",
+      "discovered_via": [
+        "OpenAlex"
+      ],
+      "category": "时空预测",
+      "topics": [
+        "交通预测"
+      ],
+      "title": "Predictive Traffic Management Through Group Optimal Path Allocation",
+      "title_zh": "",
+      "date": "2026-11-22",
+      "source": "OpenAlex",
+      "venue": "Lecture notes in mobility",
+      "status": "数据库记录：conference-paper · 尚待核验",
+      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
+      "verified": false,
+      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
+      "method": "原始英文摘要摘录（未经人工核验）：This study proposes a novel traffic congestion prediction and routing framework for urban road networks, leveraging on a dynamic strategy for collective agent behavior. Unlike conventional navigation systems that optimize individual travel time, our approach focuses on system-wide efficiency through group-based route assignment. The core mechanism models traffic as dynamic flux of agents within a graph traversal algorithm, where the optimal path is adapted according to a weighted graph of congestion probabilities. A key innovation lies in forecasting not only current congestion but also the future congestion induced by routing decisions, using a threshold-triggered mechanism based on the Poisson-distributed traffic, to detect emerging bottlenecks and reroute demand proactively. This two-st",
+      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
+      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
+      "questions": [
+        "论文是否公开实验数据与源码？",
+        "是否使用与既有工作一致的评价协议？"
+      ],
+      "url": "https://doi.org/10.1007/978-3-032-36098-4_158",
+      "doi": "10.1007/978-3-032-36098-4_158",
+      "code": "",
+      "featured": false,
+      "editorial": false,
+      "venue_abbr": "待核验",
+      "venue_full": "Lecture notes in mobility",
+      "ccf_grade": "待核验",
+      "ccf_listed": null,
+      "ccf_edition": "2026-03-31 第七版",
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
+      "cas_zone": "类型待核验",
+      "cas_edition": null,
+      "cas_source": ""
+    },
     {
       "id": "openalex-f220f8b1e63d5c",
       "type": "paper",
@@ -110,6 +236,48 @@
       "impact_factor_year": null,
       "impact_factor_source": "",
       "letpub_url": ""
+    },
+    {
+      "id": "arxiv-6484b0359e0873",
+      "type": "paper",
+      "publication_type": "preprint",
+      "discovered_via": [
+        "arXiv"
+      ],
+      "category": "时空预测",
+      "topics": [
+        "交通预测"
+      ],
+      "title": "A Sparsity Analysis of Traffic Forecasting Architectures: How Much Missing Data is Too Much?",
+      "title_zh": "",
+      "date": "2026-11-19",
+      "source": "arXiv",
+      "venue": "arXiv 预印本",
+      "status": "预印本 · 非录用证明",
+      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
+      "verified": false,
+      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
+      "method": "原始英文摘要摘录（未经人工核验）：Traffic forecasting models are typically evaluated under ideal conditions with complete data. This evaluation does not reflect the frequent sensor failures and communication outages common in real-world deployments. This paper presents a comprehensive analysis of multivariate traffic prediction models to evaluate their performance under varying levels of sensor data loss during inference. We benchmark several architectural paradigms, including graph neural networks, attention-based Transformers, and selective state-space models, across sparsity levels ranging from zero to complete sensor loss, using two widely used multi-channel traffic benchmarks. To ensure consistent comparison across traffic variables, we use normalized metrics and define a usability threshold to identify when predictio",
+      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
+      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
+      "questions": [
+        "论文是否公开实验数据与源码？",
+        "是否使用与既有工作一致的评价协议？"
+      ],
+      "url": "http://arxiv.org/abs/2611.26847v1",
+      "doi": "",
+      "code": "",
+      "featured": false,
+      "editorial": false,
+      "venue_abbr": "arXiv",
+      "venue_full": "arXiv 预印本平台",
+      "ccf_grade": "不适用",
+      "ccf_listed": null,
+      "ccf_edition": null,
+      "ccf_source": "",
+      "cas_zone": "不适用",
+      "cas_edition": null,
+      "cas_source": ""
     },
     {
       "id": "arxiv-82106f5b8c0e75",
@@ -505,8 +673,13 @@
     }
   ],
   "daily_digest": {
-    "date": "2026-11-22",
-    "ids": [],
+    "date": "2026-11-23",
+    "ids": [
+      "openalex-e1c9edf17768c6",
+      "openalex-d46b64a587d740",
+      "openalex-779256f5f55518",
+      "arxiv-6484b0359e0873"
+    ],
     "target": "每天优选3–5篇；不足则不凑数",
     "mode": "算法初筛，未完成全文人工核验"
   },
