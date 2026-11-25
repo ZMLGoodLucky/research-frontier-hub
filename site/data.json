@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-24T10:30:23+00:00",
-  "last_checked_at": "2026-11-24T10:30:23+00:00",
+  "generated_at": "2026-11-25T09:19:09+00:00",
+  "last_checked_at": "2026-11-25T09:19:09+00:00",
   "timezone": "Asia/Shanghai",
   "sources_note": "自动发现未进行同行评审；期刊与会议分区须人工核实。",
   "fetch_status": [
     {
       "source": "OpenAlex",
       "ok": true,
-      "collected": 6
+      "collected": 3
     },
     {
       "source": "arXiv",
@@ -231,48 +231,6 @@
       "cas_source": ""
     },
     {
-      "id": "openalex-e1c9edf17768c6",
-      "type": "paper",
-      "publication_type": "unknown",
-      "discovered_via": [
-        "OpenAlex"
-      ],
-      "category": "时空预测",
-      "topics": [
-        "交通预测"
-      ],
-      "title": "Spatio-Temporal Graph Convolutional Networks in Real-Time Urban Systems: Multi-Horizon Learning, Deployment and Residual Correction for Short-Term Traffic Prediction",
-      "title_zh": "",
-      "date": "2026-11-22",
-      "source": "OpenAlex",
-      "venue": "Lecture notes in mobility",
-      "status": "数据库记录：conference-paper · 尚待核验",
-      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
-      "verified": false,
-      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
-      "method": "原始英文摘要摘录（未经人工核验）：Accurate short-term forecasting of traffic metrics is essential for proactive traffic management in dynamic urban environments. This study investigates the deployment of Spatio-Temporal Graph Convolutional Networks (STGCNs) for real-time traffic prediction, with a primary focus on the urban network of Thessaloniki, Greece. Using one-minute resolution data from 583 paths, we trained models at multiple temporal resolutions (1, 5, 15, and 30 min), each predicting the next aggregated step. The deployed one-minute model supports continuous imputation and immediate prediction, while the deployed five-minute model provides operational forecasts and serves as the basis for a residual correction module that learns from systematic errors to improve accuracy. To evaluate generalizability, the methodo",
-      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
-      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
-      "questions": [
-        "论文是否公开实验数据与源码？",
-        "是否使用与既有工作一致的评价协议？"
-      ],
-      "url": "https://doi.org/10.1007/978-3-032-36098-4_147",
-      "doi": "10.1007/978-3-032-36098-4_147",
-      "code": "",
-      "featured": false,
-      "editorial": false,
-      "venue_abbr": "待核验",
-      "venue_full": "Lecture notes in mobility",
-      "ccf_grade": "待核验",
-      "ccf_listed": null,
-      "ccf_edition": "2026-03-31 第七版",
-      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
-      "cas_zone": "类型待核验",
-      "cas_edition": null,
-      "cas_source": ""
-    },
-    {
       "id": "openalex-d46b64a587d740",
       "type": "paper",
       "publication_type": "unknown",
@@ -301,6 +259,48 @@
       ],
       "url": "https://doi.org/10.1007/978-3-032-36098-4_158",
       "doi": "10.1007/978-3-032-36098-4_158",
+      "code": "",
+      "featured": false,
+      "editorial": false,
+      "venue_abbr": "待核验",
+      "venue_full": "Lecture notes in mobility",
+      "ccf_grade": "待核验",
+      "ccf_listed": null,
+      "ccf_edition": "2026-03-31 第七版",
+      "ccf_source": "https://www.ccf.org.cn/Academic_Evaluation/By_category/2026-03-31/870181.shtml",
+      "cas_zone": "类型待核验",
+      "cas_edition": null,
+      "cas_source": ""
+    },
+    {
+      "id": "openalex-e1c9edf17768c6",
+      "type": "paper",
+      "publication_type": "unknown",
+      "discovered_via": [
+        "OpenAlex"
+      ],
+      "category": "时空预测",
+      "topics": [
+        "交通预测"
+      ],
+      "title": "Spatio-Temporal Graph Convolutional Networks in Real-Time Urban Systems: Multi-Horizon Learning, Deployment and Residual Correction for Short-Term Traffic Prediction",
+      "title_zh": "",
+      "date": "2026-11-22",
+      "source": "OpenAlex",
+      "venue": "Lecture notes in mobility",
+      "status": "数据库记录：conference-paper · 尚待核验",
+      "level": "等级尚未核验；不能依据元数据推定分区 / CCF 等级",
+      "verified": false,
+      "problem": "自动发现候选：尚未核对全文的研究问题与创新贡献，请点击原文阅读。",
+      "method": "原始英文摘要摘录（未经人工核验）：Accurate short-term forecasting of traffic metrics is essential for proactive traffic management in dynamic urban environments. This study investigates the deployment of Spatio-Temporal Graph Convolutional Networks (STGCNs) for real-time traffic prediction, with a primary focus on the urban network of Thessaloniki, Greece. Using one-minute resolution data from 583 paths, we trained models at multiple temporal resolutions (1, 5, 15, and 30 min), each predicting the next aggregated step. The deployed one-minute model supports continuous imputation and immediate prediction, while the deployed five-minute model provides operational forecasts and serves as the basis for a residual correction module that learns from systematic errors to improve accuracy. To evaluate generalizability, the methodo",
+      "contribution": "自动采集不进行创新性、领先性或方法有效性的判断。",
+      "relevance": "待人工审核与多视角、自监督、动态图或事件引导交通预测研究的直接关联。",
+      "questions": [
+        "论文是否公开实验数据与源码？",
+        "是否使用与既有工作一致的评价协议？"
+      ],
+      "url": "https://doi.org/10.1007/978-3-032-36098-4_147",
+      "doi": "10.1007/978-3-032-36098-4_147",
       "code": "",
       "featured": false,
       "editorial": false,
@@ -795,11 +795,8 @@
     }
   ],
   "daily_digest": {
-    "date": "2026-11-24",
-    "ids": [
-      "arxiv-c2b68a5511ecaf",
-      "openalex-70a9fb84555fd1"
-    ],
+    "date": "2026-11-25",
+    "ids": [],
     "target": "每天优选3–5篇；不足则不凑数",
     "mode": "算法初筛，未完成全文人工核验"
   },
