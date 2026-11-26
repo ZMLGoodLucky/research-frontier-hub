@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-25T09:19:09+00:00",
-  "last_checked_at": "2026-11-25T09:19:09+00:00",
+  "generated_at": "2026-11-26T08:58:21+00:00",
+  "last_checked_at": "2026-11-26T08:58:21+00:00",
   "timezone": "Asia/Shanghai",
   "sources_note": "自动发现未进行同行评审；期刊与会议分区须人工核实。",
   "fetch_status": [
     {
       "source": "OpenAlex",
       "ok": true,
-      "collected": 3
+      "collected": 0
     },
     {
       "source": "arXiv",
@@ -795,7 +795,7 @@
     }
   ],
   "daily_digest": {
-    "date": "2026-11-25",
+    "date": "2026-11-26",
     "ids": [],
     "target": "每天优选3–5篇；不足则不凑数",
     "mode": "算法初筛，未完成全文人工核验"
