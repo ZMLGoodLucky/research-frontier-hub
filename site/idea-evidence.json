@@ -1,16 +1,28 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-11-21T17:09:24+08:00",
+  "checked_at": "2026-11-28T17:44:38+08:00",
   "timezone": "Asia/Shanghai",
   "lookback_days": 14,
-  "source_data_generated_at": "2026-11-21T07:48:24+00:00",
+  "source_data_generated_at": "2026-11-28T08:31:56+00:00",
   "review_method": "基于公开元数据标题/主题自动匹配，非论文全文核验",
   "status": "自动证据更新不修改核心科学问题及三个创新假设",
   "topics": {
     "event-evidence": {
-      "papers": [],
-      "new_count": 0,
-      "summary": "新增匹配 0 篇；论文贡献及重叠性待全文核验"
+      "papers": [
+        {
+          "title": "RECAST: Reliability-Calibrated Evidence-State Response Learning for Long-Horizon Urban Traffic Forecasting",
+          "date": "2026-11-26",
+          "venue": "Communications in computer and information science",
+          "url": "https://doi.org/10.1007/978-981-92-8143-5_26",
+          "doi": "10.1007/978-981-92-8143-5_26",
+          "discovered_via": [
+            "OpenAlex"
+          ],
+          "candidate_only": true
+        }
+      ],
+      "new_count": 1,
+      "summary": "新增匹配 1 篇；论文贡献及重叠性待全文核验"
     },
     "incident-arrival-boundary": {
       "papers": [],
@@ -20,26 +32,41 @@
     "graph-credibility": {
       "papers": [
         {
-          "title": "Time-Aware Spatio-Temporal Graph Neural Networks for Traffic Forecasting",
-          "date": "2026-11-20",
-          "venue": "SAE technical papers on CD-ROM/SAE technical paper series",
-          "url": "https://doi.org/10.4271/2026-99-2415",
-          "doi": "10.4271/2026-99-2415",
+          "title": "STMemoLLM: A Spatial-Temporal Memory-Augmented LLM for Robust Traffic Forecasting",
+          "date": "2026-11-23",
+          "venue": "arXiv 预印本平台",
+          "url": "http://arxiv.org/abs/2611.30148v1",
+          "doi": "",
+          "discovered_via": [
+            "arXiv"
+          ],
+          "candidate_only": true
+        },
+        {
+          "title": "A Recovered Average Is Not a Defended Corridor: What Adversarial Training Buys Spatiotemporal Traffic Forecasters, Why the Case That Static Methods Fail Rests on Node Selection While the Evidence of Failure Comes From Attack Shape, and the Evaluation That Would Tell Them Apart",
+          "date": "2026-11-22",
+          "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+          "url": "https://doi.org/10.5281/zenodo.24430422",
+          "doi": "10.5281/zenodo.24430422",
           "discovered_via": [
             "OpenAlex"
           ],
           "candidate_only": true
         }
       ],
-      "new_count": 1,
-      "summary": "新增匹配 1 篇；论文贡献及重叠性待全文核验"
+      "new_count": 2,
+      "summary": "新增匹配 2 篇；论文贡献及重叠性待全文核验"
     }
   },
   "seen": {
-    "event-evidence": [],
+    "event-evidence": [
+      "https://doi.org/10.1007/978-981-92-8143-5_26"
+    ],
     "incident-arrival-boundary": [],
     "graph-credibility": [
-      "https://doi.org/10.4271/2026-99-2415"
+      "http://arxiv.org/abs/2611.30148v1",
+      "https://doi.org/10.4271/2026-99-2415",
+      "https://doi.org/10.5281/zenodo.24430422"
     ]
   }
 }
